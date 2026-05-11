@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Intellabooks × Àṣé Advisory — The Blueprint</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#013356;--navy-deep:#011f35;
+  --gold:#D4AF37;--gold-light:rgba(212,175,55,0.1);--gold-border:rgba(212,175,55,0.25);
+  --barbie:#FF1493;--barbie-light:rgba(255,20,147,0.08);--barbie-border:rgba(255,20,147,0.25);
+  --pink:#FF85A2;--pink-light:rgba(255,133,162,0.08);
+  --green:#059669;--green-light:rgba(5,150,105,0.08);
+  --ivory:#FFF8F5;--white:#FFFFFF;--gray:#F4F4F6;
+  --muted:#6E6E73;--bd:rgba(1,51,86,0.08);--bd2:rgba(1,51,86,0.15);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--gray);color:#1D1D1F;line-height:1.6}
+
+/* NAV — centered */
+.nav{position:sticky;top:0;z-index:100;background:rgba(1,31,53,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.07);display:flex;justify-content:center;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{background:none;border:none;cursor:pointer;padding:0.9rem 1.15rem;font-size:0.68rem;font-family:'DM Sans',sans-serif;color:rgba(255,255,255,0.38);border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s;letter-spacing:0.07em;text-transform:uppercase}
+.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-btn:hover:not(.active){color:rgba(255,255,255,0.72)}
+
+/* HERO */
+.hero{background:var(--navy-deep);padding:5rem 2.5rem 0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 80% 15%,rgba(212,175,55,0.09),transparent 55%),radial-gradient(ellipse 55% 65% at 10% 80%,rgba(255,133,162,0.05),transparent 55%),radial-gradient(ellipse 80% 40% at 50% 100%,rgba(255,182,193,0.08),transparent 50%)}
+.hero-inner{position:relative;z-index:1;max-width:820px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.28);border-radius:100px;padding:0.4rem 1.4rem;font-size:0.62rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:2rem}
+.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);color:var(--white);line-height:1.08;margin-bottom:1.25rem}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,0.52);line-height:1.78;max-width:600px;margin:0 auto 2rem}
+
+/* MASQUERADE HERO BANNER */
+.masq-banner{background:rgba(255,255,255,0.04);border:1px solid rgba(200,0,100,0.3);border-radius:18px;padding:1.5rem 2rem;margin:1.5rem auto 0;max-width:720px;text-align:center;position:relative;overflow:hidden}
+.masq-banner::after{content:'🎭';position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);font-size:2.5rem;opacity:0.18}
+.masq-eyebrow{font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(200,0,100,0.7);font-weight:700;margin-bottom:0.5rem}
+.masq-title{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3vw,1.7rem);color:var(--white);margin-bottom:0.4rem}
+.masq-sub{font-size:0.82rem;color:rgba(255,255,255,0.52);line-height:1.6}
+.masq-pills{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-top:0.85rem}
+.masq-pill{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:0.25rem 0.85rem;font-size:0.68rem;color:rgba(255,255,255,0.55)}
+
+/* CALENDAR STRIP */
+.cal-wrap{background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.07);margin-top:2rem;padding:2rem 1.5rem}
+.cal-label{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:700;margin-bottom:1.25rem;text-align:left}
+.cal-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0.5rem}
+@media(max-width:640px){.cal-grid{grid-template-columns:repeat(3,1fr)}}
+.cal-month{border-radius:10px;padding:0.7rem 0.6rem;text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);cursor:default;transition:background .15s}
+.cal-month:hover{background:rgba(255,255,255,0.07)}
+.cal-month.cohort{border-color:rgba(212,175,55,0.25);background:rgba(212,175,55,0.06)}
+.cal-month.special{border-color:rgba(255,133,162,0.3);background:rgba(255,133,162,0.08)}
+.cal-month.finale{border-color:rgba(200,0,100,0.55);background:rgba(200,0,100,0.08)}
+.cal-mo{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem}
+.cal-month.cohort .cal-mo{color:var(--gold)}
+.cal-month.special .cal-mo{color:var(--pink)}
+.cal-month.finale .cal-mo{color:rgba(200,0,100,0.85)}
+.cal-date{font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.3}
+.cal-month.cohort .cal-date{color:rgba(255,255,255,0.75)}
+.cal-month.finale .cal-date{color:var(--white);font-weight:600}
+.cal-tag{display:inline-block;font-size:0.55rem;background:rgba(212,175,55,0.15);border-radius:100px;padding:0.15rem 0.5rem;color:var(--gold);margin-top:0.3rem;letter-spacing:0.06em;text-transform:uppercase}
+.cal-tag.pink{background:rgba(255,133,162,0.15);color:var(--pink)}
+.cal-tag.barbie{background:rgba(255,20,147,0.2);color:var(--barbie);font-weight:800;letter-spacing:0.04em}
+.cal-legend{display:flex;gap:1.25rem;margin-top:1rem;justify-content:center;flex-wrap:wrap}
+.cal-legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:rgba(255,255,255,0.38)}
+.cal-legend-dot{width:8px;height:8px;border-radius:50%}
+
+/* PAGES */
+.page{display:none;padding:2.75rem 1.5rem 6rem;max-width:900px;margin:0 auto}
+.page.active{display:block}
+
+/* TYPE */
+.eyebrow{font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;font-weight:700;margin-bottom:0.75rem;display:block}
+.eyebrow.gold{color:var(--gold)}.eyebrow.barbie{color:var(--barbie)}.eyebrow.green{color:var(--green)}.eyebrow.muted{color:var(--muted)}.eyebrow.pink{color:var(--pink)}
+.pg-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);line-height:1.18;margin-bottom:0.6rem}
+.pg-sub{font-size:0.92rem;color:var(--muted);line-height:1.78;max-width:640px;margin-bottom:2rem}
+.section{margin-bottom:2.5rem}
+
+/* CARDS */
+.card{background:var(--white);border-radius:18px;padding:1.75rem;box-shadow:0 4px 24px rgba(1,51,86,0.06);margin-bottom:0.85rem}
+.card.navy{background:var(--navy-deep);border:1px solid rgba(255,255,255,0.07)}
+.card.navy p,.card.navy li{color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.8}
+.card.navy strong{color:var(--gold)}
+.card.gold{background:var(--gold-light);border:1px solid var(--gold-border)}
+.card.green{background:var(--green-light);border:1px solid rgba(5,150,105,0.18)}
+.card.barbie{background:var(--barbie-light);border:1px solid var(--barbie-border)}
+.card p{font-size:0.88rem;color:var(--muted);line-height:1.78}
+.card h4{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:0.45rem}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem}
+@media(max-width:620px){.two-col{grid-template-columns:1fr}}
+
+/* COMPLIANCE ALERT */
+.compliance-alert{background:rgba(255,255,255,0.98);border:1px solid rgba(200,0,100,0.2);border-left:3px solid rgba(200,0,100,0.55);border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 3px 16px rgba(1,51,86,0.05)}
+.compliance-alert::before{content:'🔐';position:absolute;right:1.25rem;top:1.25rem;font-size:1.3rem;opacity:0.18}
+.compliance-label{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(200,0,100,0.7);font-weight:800;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
+.compliance-label::before{content:'';width:7px;height:7px;border-radius:50%;background:rgba(200,0,100,0.55);display:inline-block;flex-shrink:0}
+.compliance-alert h4{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem}
+.compliance-alert p{font-size:0.83rem;color:var(--muted);line-height:1.65;margin-bottom:0}
+.compliance-check{display:flex;align-items:center;gap:0.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(200,0,100,0.12)}
+.check-box{width:22px;height:22px;border-radius:6px;border:1.5px solid rgba(200,0,100,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s;background:transparent}
+.check-box.checked{background:rgba(200,0,100,0.8);border-color:rgba(200,0,100,0.8)}
+.check-box .checkmark{color:white;font-size:0.7rem;display:none}
+.check-box.checked .checkmark{display:block}
+.check-label{font-size:0.82rem;color:var(--navy);font-weight:600;cursor:pointer}
+.check-status{font-size:0.68rem;color:var(--muted);margin-left:auto}
+.check-status.confirmed{color:rgba(200,0,100,0.8);font-weight:600}
+
+/* PORTAL HIGHLIGHT */
+.portal-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--navy);border:1px solid var(--gold-border);border-radius:10px;padding:0.45rem 1.1rem;font-size:0.75rem;font-weight:700;color:var(--gold);letter-spacing:0.02em}
+.portal-badge::before{content:'⚡';font-size:0.85rem}
+
+/* PATH HERO SECTION */
+.path-hero{background:var(--white);border-radius:22px;padding:2.25rem;margin-bottom:1.25rem;position:relative;border:1px solid var(--bd);box-shadow:0 4px 24px rgba(1,51,86,0.06)}
+.path-hero-inner{position:relative;z-index:1}
+.path-hero h3{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,1.8rem);color:var(--navy);margin-bottom:0.5rem}
+.path-hero p{font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:560px}
+.path-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-top:1.5rem;position:relative;z-index:1}
+@media(max-width:680px){.path-cards{grid-template-columns:1fr}}
+.path-card{border-radius:16px;padding:1.35rem 1.25rem;border:1px solid var(--bd);cursor:pointer;transition:all .2s;background:var(--white);box-shadow:0 2px 12px rgba(1,51,86,0.04)}
+.path-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(1,51,86,0.1)}
+.path-card.p-gold{background:var(--gold-light);border-color:var(--gold-border)}
+.path-card.p-barbie{background:rgba(200,0,100,0.04);border-color:rgba(200,0,100,0.18)}
+.path-card.p-navy{background:rgba(1,51,86,0.03);border-color:var(--bd2)}
+.path-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;margin-bottom:0.35rem}
+.path-card.p-gold .path-num{color:var(--gold)}
+.path-card.p-barbie .path-num{color:rgba(200,0,100,0.6)}
+.path-card.p-navy .path-num{color:rgba(1,51,86,0.2)}
+.path-name{font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.35rem}
+.path-card.p-gold .path-name{color:#8B6400}
+.path-card.p-barbie .path-name{color:rgba(200,0,100,0.75)}
+.path-card.p-navy .path-name{color:var(--navy)}
+.path-desc{font-size:0.78rem;line-height:1.55;color:var(--muted)}
+.path-detail{display:none;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--bd);font-size:0.76rem;line-height:1.6;color:var(--muted)}
+.path-card.expanded .path-detail{display:block}
+
+/* SOCIAL PLATFORM GRID */
+.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-top:1rem}
+@media(max-width:640px){.platform-grid{grid-template-columns:1fr 1fr}}
+.platform-card{background:var(--white);border-radius:14px;padding:1.1rem;border:1px solid var(--bd);box-shadow:0 3px 14px rgba(1,51,86,0.05);text-align:center}
+.platform-icon{font-size:1.6rem;margin-bottom:0.4rem}
+.platform-name{font-size:0.78rem;font-weight:700;color:var(--navy);margin-bottom:0.25rem}
+.platform-role{font-size:0.72rem;color:var(--muted);line-height:1.45}
+.platform-freq{display:inline-block;margin-top:0.4rem;background:var(--gold-light);border-radius:100px;padding:0.15rem 0.6rem;font-size:0.62rem;color:#8B6400;font-weight:600}
+
+/* FLOW DIAGRAM */
+.flow{display:flex;align-items:stretch;gap:0;margin:1.5rem 0;overflow-x:auto;padding-bottom:0.5rem}
+.flow-node{background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 1.1rem;min-width:130px;flex-shrink:0;text-align:center;box-shadow:0 3px 16px rgba(1,51,86,0.05)}
+.flow-node.gold{background:var(--gold-light);border-color:var(--gold-border)}
+.flow-node.barbie{background:var(--barbie-light);border-color:var(--barbie-border)}
+.flow-node.green{background:var(--green-light);border-color:rgba(5,150,105,0.2)}
+.flow-node.navy{background:var(--navy);border-color:transparent}
+.flow-icon{font-size:1.4rem;margin-bottom:0.35rem}
+.flow-label{font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--navy);margin-bottom:0.2rem}
+.flow-node.navy .flow-label{color:var(--gold)}
+.flow-sub{font-size:0.72rem;color:var(--muted);line-height:1.45}
+.flow-node.navy .flow-sub{color:rgba(255,255,255,0.5)}
+.flow-arrow{display:flex;align-items:center;padding:0 0.35rem;color:var(--gold);font-size:1.1rem;flex-shrink:0;font-weight:700}
+
+/* ACCORDION */
+.accord{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(1,51,86,0.06);margin-bottom:0.75rem;border:1px solid var(--bd)}
+.accord-head{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;cursor:pointer;transition:background .15s;user-select:none}
+.accord-head:hover{background:rgba(1,51,86,0.02)}
+.accord-head-left{display:flex;align-items:center;gap:0.85rem}
+.accord-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.accord-icon.gold{background:var(--gold-light)}.accord-icon.barbie{background:var(--barbie-light)}.accord-icon.green{background:var(--green-light)}.accord-icon.navy{background:rgba(1,51,86,0.07)}
+.accord-title{font-size:0.95rem;font-weight:600;color:var(--navy)}
+.accord-tag{font-size:0.65rem;color:var(--muted);margin-top:0.1rem}
+.accord-chevron{font-size:0.8rem;color:var(--muted);transition:transform .25s;flex-shrink:0}
+.accord-body{display:none;padding:0 1.5rem 1.4rem;border-top:1px solid var(--bd)}
+.accord-body.open{display:block}
+.accord-body p{font-size:0.87rem;color:var(--muted);line-height:1.75;margin-bottom:0.75rem}
+.accord-body p:last-child{margin-bottom:0}
+.accord-body ul{list-style:none;margin:0.5rem 0}
+.accord-body ul li{font-size:0.85rem;color:var(--muted);padding:0.4rem 0;border-bottom:1px solid var(--bd);display:flex;align-items:flex-start;gap:0.6rem;line-height:1.55}
+.accord-body ul li:last-child{border-bottom:none}
+.accord-body ul li::before{content:"→";color:var(--gold);font-weight:700;flex-shrink:0}
+.accord-body ul li strong{color:var(--navy)}
+.accord-body .sub-label{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:1rem 0 0.4rem;display:block}
+
+/* EMAIL SEQUENCE */
+.email-seq{display:flex;flex-direction:column;gap:0}
+.email-touch{display:flex;gap:0.85rem;align-items:flex-start;padding:0.85rem 0;border-bottom:1px solid var(--bd)}
+.email-touch:last-child{border-bottom:none}
+.touch-num{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.1rem}
+.touch-body h4{font-size:0.88rem;font-weight:600;color:var(--navy);margin-bottom:0.2rem}
+.touch-timing{font-size:0.7rem;color:var(--gold);font-weight:600;margin-bottom:0.2rem}
+.touch-body p{font-size:0.8rem;color:var(--muted);line-height:1.55}
+
+/* STEP CARDS */
+.step-grid{display:flex;flex-direction:column;gap:0.75rem}
+.step-card{background:var(--white);border-radius:16px;border:1px solid var(--bd);box-shadow:0 3px 16px rgba(1,51,86,0.05);overflow:hidden}
+.step-card.barbie-step{border-color:var(--barbie-border)}
+.step-head{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;cursor:pointer;transition:background .15s}
+.step-head:hover{background:rgba(1,51,86,0.02)}
+.step-num{width:34px;height:34px;border-radius:50%;background:var(--gold-light);border:1.5px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;color:#8B6400;flex-shrink:0}
+.step-card.barbie-step .step-num{background:rgba(200,0,100,0.06);border-color:rgba(200,0,100,0.2);color:rgba(180,0,90,0.8)}
+.step-head-body{flex:1}
+.step-title{font-size:0.92rem;font-weight:600;color:var(--navy)}
+.step-meta{font-size:0.72rem;color:var(--muted);margin-top:0.1rem}
+.step-caret{font-size:0.75rem;color:var(--muted);transition:transform .25s}
+.step-detail{display:none;padding:0 1.4rem 1.25rem 3.25rem;border-top:1px solid var(--bd)}
+.step-detail.open{display:block}
+.step-detail p{font-size:0.85rem;color:var(--muted);line-height:1.72;margin-top:0.85rem}
+.step-timeline{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-top:0.85rem;display:block}
+.step-detail .action{display:inline-block;margin-top:0.85rem;background:rgba(200,0,100,0.06);border:1px solid rgba(200,0,100,0.2);border-radius:100px;padding:0.35rem 1rem;font-size:0.72rem;color:rgba(180,0,90,0.85);font-weight:600;cursor:pointer}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:0.855rem;margin:0.85rem 0;background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(1,51,86,0.05)}
+th{text-align:left;padding:0.8rem 1rem;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:#8B6400;font-weight:700;border-bottom:1px solid var(--bd2)}
+td{padding:0.85rem 1rem;border-bottom:1px solid var(--bd);color:var(--muted);vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}
+td:first-child{color:var(--navy);font-weight:600}
+.strike{text-decoration:line-through;color:#bbb;font-weight:400;font-size:0.78rem}
+.free-tag{display:inline-block;background:var(--green-light);border:1px solid rgba(5,150,105,0.2);border-radius:100px;padding:0.15rem 0.65rem;font-size:0.65rem;font-weight:700;color:var(--green);margin-left:0.4rem}
+
+/* CLOSING */
+.closing{background:var(--navy-deep);border-radius:22px;padding:3rem 2.5rem;text-align:center;position:relative;overflow:hidden;margin-top:2rem}
+.closing::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 50% 0%,rgba(212,175,55,0.1),transparent)}
+.closing h3{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);color:var(--white);margin-bottom:0.85rem;position:relative}
+.closing h3 em{color:var(--gold);font-style:italic}
+.closing p{font-size:0.9rem;color:rgba(255,255,255,0.55);max-width:500px;margin:0 auto 1.5rem;line-height:1.8;position:relative}
+.closing-cta{display:inline-block;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.3);border-radius:12px;padding:0.85rem 1.75rem;font-size:0.85rem;color:var(--gold);font-weight:500;position:relative}
+
+.verse{border-left:3px solid var(--gold);padding:0.9rem 1.25rem;font-style:italic;color:var(--muted);font-size:0.88rem;line-height:1.75;margin:1.5rem 0;background:rgba(212,175,55,0.04);border-radius:0 10px 10px 0}
+.verse cite{display:block;font-style:normal;font-size:0.68rem;color:#8B6400;font-weight:700;margin-top:0.4rem;letter-spacing:0.08em}
+.divider{height:1px;background:var(--bd);margin:2rem 0}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+<div class="hero-inner">
+  <div class="hero-badge"><span></span>Intellabooks × Àṣé Advisory & Tech · May 2026</div>
+  <h1>Àṣé is Already Moving.<br><em>Now It Has an Engine.</em></h1>
+  <p class="hero-sub">Rolanda Anwar, you have built something rare — a full ecosystem that structures real businesses, creates measurable wealth in the African diaspora, and does it all with faith at the center. Intellabooks wraps around every layer of what you've built so the follow-through matches the vision.</p>
+
+  <!-- YEAR CALENDAR -->
+  <div class="cal-wrap">
+    <div class="cal-label">2026 Campaign Calendar — Build Your Business in a Day</div>
+    <div class="cal-grid">
+      <div class="cal-month cohort"><div class="cal-mo">Jan</div><div class="cal-date">Jan 10</div><div class="cal-tag">Cohort 1</div></div>
+      <div class="cal-month cohort"><div class="cal-mo">Feb</div><div class="cal-date">Feb 7</div><div class="cal-tag">Cohort 2</div></div>
+      <div class="cal-month cohort"><div class="cal-mo">Mar</div><div class="cal-date">Mar 7</div><div class="cal-tag">Cohort 3</div></div>
+      <div class="cal-month cohort"><div class="cal-mo">Apr</div><div class="cal-date">Apr 11</div><div class="cal-tag">Cohort 4</div></div>
+      <div class="cal-month cohort"><div class="cal-mo">May</div><div class="cal-date">May 2</div><div class="cal-tag">Cohort 5</div></div>
+      <div class="cal-month special"><div class="cal-mo">Jun</div><div class="cal-date">Jun 6</div><div class="cal-tag pink">Launch ✦</div></div>
+      <div class="cal-month cohort"><div class="cal-mo">Jul</div><div class="cal-date">Jul 11</div><div class="cal-tag">Cohort 7</div></div>
+      <div class="cal-month cohort"><div class="cal-mo">Aug</div><div class="cal-date">Aug 8</div><div class="cal-tag">Cohort 8</div></div>
+      <div class="cal-month cohort"><div class="cal-mo">Sep</div><div class="cal-date">Sep 12</div><div class="cal-tag">Cohort 9</div></div>
+      <div class="cal-month special"><div class="cal-mo">Oct</div><div class="cal-date">Oct 10</div><div class="cal-tag pink">Final ✦</div></div>
+      <div class="cal-month cohort"><div class="cal-mo">Nov</div><div class="cal-date">Nov 2–7</div><div class="cal-tag">Sig. Week</div></div>
+      <div class="cal-month finale"><div class="cal-mo">Nov 7</div><div class="cal-date">5–10 PM</div><div class="cal-tag barbie">🎭 Ball</div></div>
+    </div>
+    <div class="cal-legend">
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--gold)"></div>Monthly Cohort</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--pink)"></div>Special Event</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(200,0,100,0.7)"></div>Masquerade Ball Finale</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="show('home',this)">Our Focus</button>
+  <button class="nav-btn" onclick="show('flow',this)">How We Get There</button>
+  <button class="nav-btn" onclick="show('blueprint',this)">The Blueprint</button>
+  <button class="nav-btn" onclick="show('steps',this)">Action Plan</button>
+</nav>
+
+
+
+<div id="home" class="page active">
+
+  <div class="verse">
+    "Two are better than one, because they have a good return for their labor."
+    <cite>— Ecclesiastes 4:9</cite>
+  </div>
+
+  <!-- HIGH LEVEL STATEMENT -->
+  <div class="section">
+    <span class="eyebrow gold">Partnership Overview · Àṣé Advisory & Tech × Intellabooks</span>
+    <div class="pg-title">One Ecosystem.<br>Every Touchpoint Covered.</div>
+    <p class="pg-sub">Intellabooks is the communication and relationship infrastructure running underneath everything Àṣé Advisory & Tech does. From the first time someone hears about BABIAD to the moment they become a protected, thriving business — every message, every follow-up, every milestone, every celebration is handled. Automatically. In your voice. With your contacts staying yours.</p>
+  </div>
+
+  <!-- ICON GRID — MICRO LEVEL -->
+  <div class="section">
+    <span class="eyebrow gold">What Intellabooks Runs Across Your Entire Ecosystem</span>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);;gap:0.65rem;margin-bottom:0.5rem">
+      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">✉️</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Email</div>
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Sequences, nurture, campaigns — all in your voice</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">💬</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">SMS</div>
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Confirmations, reminders, check-ins, celebrations</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">📱</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Social</div>
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Instagram, LinkedIn, Meta, X, Eventbrite</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">📮</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Direct Mail</div>
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Postcards, invitations, milestone mailers</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">🗂️</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">CRM</div>
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Every contact tagged, staged, and routed</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">📋</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Forms</div>
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Stage check-ins, grant applications, intake</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">📊</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Reporting</div>
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Bi-monthly performance and SEROI data</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">✅</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Approvals</div>
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Every campaign reviewed by you before it sends</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);font-style:italic;line-height:1.6">Click into each initiative below to see exactly how Intellabooks supports it.</p>
+  </div>
+
+  <!-- BABIAD -->
+  <div class="accord">
+    <div class="accord-head" onclick="toggle(this)">
+      <div class="accord-head-left">
+        <div class="accord-icon gold">🏛️</div>
+        <div><div class="accord-title">Build Your Business in a Day</div><div class="accord-tag">Excitement before they arrive · custom follow-up after they leave</div></div>
+      </div>
+      <div class="accord-chevron">▼</div>
+    </div>
+    <div class="accord-body">
+      <p>BABIAD is the front door to the entire Àṣé ecosystem. Intellabooks makes sure that door opens with warmth — and stays open long after the event ends. The communication starts weeks before registration and continues through the full year.</p>
+      <span class="accord-body sub-label">Before They Even Register</span>
+      <ul>
+        <li><strong>Speaker teaser — Week 1</strong> — "Someone you need to hear from is joining us." Speaker 1 introduced with their story and what they're sharing. Social post + email + direct mail postcard to Rolanda's warm network.</li>
+        <li><strong>Agenda preview — Week 2</strong> — "Here's what you'll walk away knowing." Session topics revealed. What each breakout covers. The transformation available in one Saturday morning.</li>
+        <li><strong>Speaker reveal — Week 3</strong> — Speaker 2 and Speaker 3 introduced. Momentum building. Registration urgency feels natural, not manufactured.</li>
+        <li><strong>Final call — Week 4</strong> — "Seats are filling. Here's what's waiting for you." Last push across email, SMS, and social before the cohort closes.</li>
+      </ul>
+      <span class="accord-body sub-label">After Registration</span>
+      <ul>
+        <li><strong>Confirmation SMS</strong> — fires within 60 seconds of Square payment. Warm. Personal.</li>
+        <li><strong>5-touch email journey</strong> — value drop, what to expect, day-before logistics, morning-of energy.</li>
+        <li><strong>Day-of communications</strong> — check-in confirmation, session reminders, post-event summary within 1 hour.</li>
+      </ul>
+      <span class="accord-body sub-label">Custom Follow-Up by Business Stage</span>
+      <ul>
+        <li><strong>Pre-launch attendee</strong> — "Here's your next step toward making it real." Incubator introduction, entity formation resources, Legal Shield for protection from day one.</li>
+        <li><strong>Early-stage attendee</strong> — "You're building. Let's keep it moving." Systems, CRM, first client resources. Incubator qualification check.</li>
+        <li><strong>Established business</strong> — "Here's how we help businesses like yours grow." Intellabooks intro call offer. ASE high-ticket nurture begins.</li>
+        <li><strong>Growing business</strong> — "You're ready for what's next." Direct path to Intellabooks engagement and Legal Shield advanced coverage.</li>
+      </ul>
+      <span class="accord-body sub-label">Direct Mail</span>
+      <ul>
+        <li><strong>Pre-event postcard</strong> — mailed to Rolanda's warm network 3 weeks before each cohort. Event date, location, QR code to register. Physical presence in their hands.</li>
+        <li><strong>Post-event thank you card</strong> — mailed within 5 days of the event to every in-person attendee. Their name. A handwritten-feel message. The Masquerade Ball save-the-date on the back.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- INCUBATOR -->
+  <div class="accord">
+    <div class="accord-head" onclick="toggle(this)">
+      <div class="accord-head-left">
+        <div class="accord-icon gold">🌱</div>
+        <div><div class="accord-title">The Incubator</div><div class="accord-tag">Stage-based nurture · forms · check-ins · milestone progression</div></div>
+      </div>
+      <div class="accord-chevron">▼</div>
+    </div>
+    <div class="accord-body">
+      <p>The incubator is where businesses go from idea to operating reality. Intellabooks runs alongside every member at every stage — not with generic check-ins, but with communication that knows exactly where they are and speaks to them there.</p>
+      <span class="accord-body sub-label">🌰 Stage 1 — Seedling · Pre-launch, idea phase</span>
+      <ul>
+        <li><strong>Welcome sequence</strong> — what the incubator offers, what's expected, what's possible</li>
+        <li><strong>Intake form</strong> — business idea, industry, goals, timeline. This data drives everything that follows.</li>
+        <li><strong>Week 2 check-in SMS</strong> — "How are you feeling about your business concept? We have a resource for you."</li>
+        <li><strong>Legal Shield introduction email</strong> — "Before you launch, protect what you're building." Entity formation, business structure guidance, contracts from day one.</li>
+        <li><strong>Foundation grant awareness email</strong> — scholarships and funding available for businesses at this stage.</li>
+        <li><strong>Direct mail</strong> — a welcome kit postcard with their incubator milestone roadmap printed on the back.</li>
+      </ul>
+      <span class="accord-body sub-label">🌿 Stage 2 — Rooted · Newly launched, first 90 days</span>
+      <ul>
+        <li><strong>30-day check-in form</strong> — "Where are you? What's working? What do you need?" Answers feed the next sequence.</li>
+        <li><strong>Systems nudge email</strong> — introducing CRM, payment processing, client communication tools</li>
+        <li><strong>60-day milestone SMS</strong> — "Two months in. Let's celebrate and keep it moving."</li>
+        <li><strong>Legal Shield follow-up</strong> — contract review, first employee questions, business license compliance</li>
+        <li><strong>90-day progress form</strong> — structured check-in that also qualifies them for Foundation grants</li>
+      </ul>
+      <span class="accord-body sub-label">🌳 Stage 3 — Growing · 6+ months, generating revenue</span>
+      <ul>
+        <li><strong>Bi-monthly check-in email</strong> — revenue progress, client count, what support they need next</li>
+        <li><strong>Marketing infrastructure introduction</strong> — this is where the Intellabooks offer becomes natural and relevant</li>
+        <li><strong>6-month milestone celebration</strong> — email + SMS + direct mail card marking the milestone. SEROI data captured.</li>
+        <li><strong>Legal Shield upgrade email</strong> — moving from basic to preferred coverage as the business complexity grows</li>
+        <li><strong>Masquerade Ball invitation</strong> — "You've built something real this year. Here's your seat at the table."</li>
+      </ul>
+      <span class="accord-body sub-label">🌟 Stage 4 — Flourishing · Established, scaling, ready for more</span>
+      <ul>
+        <li><strong>12-month celebration email + direct mail card</strong> — a real recognition moment. Named. Personal. Meaningful.</li>
+        <li><strong>ASE high-ticket pipeline introduction</strong> — the relationship is ready for a bigger conversation</li>
+        <li><strong>Intellabooks PS invitation</strong> — "Your business is ready for a full system. Let's talk."</li>
+        <li><strong>Legal Shield full coverage recommendation</strong> — civil litigation hours, IRS audit support, employee handbook</li>
+        <li><strong>SEROI award nomination</strong> — businesses at this stage are flagged as candidates for Masquerade Ball recognition</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LEGAL SHIELD -->
+  <div class="accord">
+    <div class="accord-head" onclick="toggle(this)">
+      <div class="accord-head-left">
+        <div class="accord-icon navy">⚖️</div>
+        <div><div class="accord-title">Legal Shield</div><div class="accord-tag">Rolanda's protection business · introduced at the right moment in every journey</div></div>
+      </div>
+      <div class="accord-chevron">▼</div>
+    </div>
+    <div class="accord-body">
+      <p>Legal Shield is one of Rolanda's businesses — and it's the most natural next step for every business owner who comes through the BABIAD and incubator ecosystem. LegalShield serves over 4 million members, giving access to experienced attorneys at a flat monthly fee instead of $250–$500 per hour — which is exactly what every small business owner in Rolanda's network needs and most can't currently access.</p>
+      <p style="margin-top:0.75rem">Intellabooks introduces Legal Shield at the right moment in every contact's journey — not as a pitch, but as a natural next step in building and protecting a real business.</p>
+      <span class="accord-body sub-label">How Intellabooks Introduces Legal Shield by Stage</span>
+      <ul>
+        <li><strong>Seedling stage</strong> — entity formation, business structure, contracts from day one. "Before you launch, protect what you're building."</li>
+        <li><strong>Rooted stage</strong> — contract review, business license compliance, first employee questions. "Your business is real now. Your protection should be too."</li>
+        <li><strong>Growing stage</strong> — debt collection letters, IRS consultation, trademark protection. "You've got something worth protecting."</li>
+        <li><strong>Flourishing stage</strong> — civil litigation hours, audit support, full business coverage. "This is what a protected business looks like."</li>
+        <li><strong>BABIAD attendees</strong> — introduced in the post-event follow-up sequence based on their business stage tag. Warm. Specific. Never generic.</li>
+      </ul>
+      <span class="accord-body sub-label">Direct Mail for Legal Shield</span>
+      <ul>
+        <li><strong>Postcard campaign</strong> — mailed to incubator members at the 30-day and 90-day mark. Plain language. What it covers. What it costs. QR code to sign up.</li>
+        <li><strong>Milestone mailer</strong> — at the 6-month business anniversary, a card goes out: "You've made it six months. Here's how to protect everything you've built." Legal Shield CTA on the back.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FOUNDATION & SEROI -->
+  <div class="accord">
+    <div class="accord-head" onclick="toggle(this)">
+      <div class="accord-head-left">
+        <div class="accord-icon navy">🌍</div>
+        <div><div class="accord-title">Àṣé Foundation & SEROI</div><div class="accord-tag">Impact tracked · grants surfaced · milestones celebrated</div></div>
+      </div>
+      <div class="accord-chevron">▼</div>
+    </div>
+    <div class="accord-body">
+      <p>The Foundation is the long-term mission underneath everything. Intellabooks makes sure the impact is always visible — by capturing milestone data, surfacing grant opportunities at the right moment, and making sure every business that qualifies knows what's available to them.</p>
+      <span class="accord-body sub-label">What Intellabooks Tracks and Surfaces</span>
+      <ul>
+        <li><strong>Business structure milestone</strong> — when a Seedling formally structures their business, the system logs it and sends a Foundation grant awareness email</li>
+        <li><strong>90-day operating milestone</strong> — grant qualification form sent automatically. No one misses an opportunity because they didn't know to ask.</li>
+        <li><strong>6-month milestone</strong> — SEROI data captured. Business counted in the impact report. Email + direct mail celebration sent.</li>
+        <li><strong>12-month milestone</strong> — SEROI award nomination flagged. Business featured in the Masquerade Ball recognition.</li>
+        <li><strong>Annual SEROI report</strong> — Intellabooks compiles the data across all contacts and delivers a clean report for Rolanda — businesses structured, jobs protected, revenue created, families protected through Legal Shield.</li>
+      </ul>
+      <span class="accord-body sub-label">Direct Mail</span>
+      <ul>
+        <li><strong>Grant notification postcard</strong> — mailed when a contact qualifies for a Foundation scholarship or grant. Physical. Real. Memorable.</li>
+        <li><strong>Impact anniversary card</strong> — sent at the 12-month mark to every active incubator member. Their name. Their milestone. The community they're part of.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MASQUERADE -->
+  <div class="accord">
+    <div class="accord-head" onclick="toggle(this)">
+      <div class="accord-head-left">
+        <div class="accord-icon gold">🎭</div>
+        <div><div class="accord-title" style="color:rgba(180,0,90,0.85)">Masquerade Ball Finale — November 7, 2026</div><div class="accord-tag">The destination every campaign builds toward · all year long</div></div>
+      </div>
+      <div class="accord-chevron">▼</div>
+    </div>
+    <div class="accord-body">
+      <p>Every email sent. Every SMS delivered. Every postcard mailed. Every social post published. All year long, they build toward one night. The Masquerade Ball is the celebration of every business that showed up, did the work, and built something real in 2026.</p>
+      <span class="accord-body sub-label">How Intellabooks Builds the Campaign All Year</span>
+      <ul>
+        <li><strong>Q1 — January through March</strong> — cohorts promoted. Community introduced. The Ball teased as "something is coming in November."</li>
+        <li><strong>Q2 — April through June</strong> — real results from Q1 cohorts shared publicly. SEROI metrics released. Ball announced. Social momentum growing.</li>
+        <li><strong>July 1 — Ticket launch</strong> — email, SMS, and direct mail save-the-date mailed to all contacts simultaneously. Every incubator member gets a personal invitation.</li>
+        <li><strong>Q3 — July through September</strong> — all platforms shift toward the Ball. Countdown begins. Attendee spotlights. Award nominations opened.</li>
+        <li><strong>Q4 — October and November</strong> — final cohort. Full push. Ball opens to the public. Every post is a countdown. The evening arrives.</li>
+      </ul>
+      <span class="accord-body sub-label">Direct Mail for the Ball</span>
+      <ul>
+        <li><strong>Save-the-date card</strong> — mailed July 1 to every contact in the ecosystem. Elegant. Event-worthy. Makes the Ball feel real before they've bought a ticket.</li>
+        <li><strong>Formal invitation mailer</strong> — mailed September 1 to qualified incubator members and BABIAD alumni. Their name on the envelope. The evening described. A QR code to purchase their seat.</li>
+        <li><strong>Award nominee notification</strong> — a personal card mailed to each nominated business. "You've been recognized." The categories. The evening. The meaning of the moment.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div id="flow" class="page">
+
+  <!-- THREE PATHS — TOP AND POP -->
+  <div class="section">
+    <span class="eyebrow gold">Where Every Person Goes From Here</span>
+    <div class="pg-title">Three Clear Paths.<br>Every Contact Continues.</div>
+    <div class="path-hero">
+      <div class="path-hero-inner">
+        <h3>Every person who enters your world<br>already has a clear next step.</h3>
+        <p>Intellabooks sorts every person who comes through BABIAD into exactly the right path — automatically, based on their engagement and business stage. You define who goes where. The system routes them perfectly, every time, without your team having to manually decide anything.</p>
+        <div class="path-cards">
+          <div class="path-card p-gold" onclick="expandPath(this)">
+            <div class="path-num">01</div>
+            <div class="path-name">Intellabooks Client</div>
+            <div class="path-desc">Established businesses ready for a full marketing and communication system.</div>
+            <div class="path-detail">$500 books the intro call — applies toward month one. Goal: 10 per cohort. Starts at Core and grows over 4 months as the data matures. The close happens in the room or on the follow-up call. Either way, the system captures them. ↓ Tap to expand</div>
+          </div>
+          <div class="path-card p-barbie" onclick="expandPath(this)">
+            <div class="path-num">02</div>
+            <div class="path-name">Your Incubator</div>
+            <div class="path-desc">Businesses that qualify for your ongoing program — criteria defined entirely by you.</div>
+            <div class="path-detail">Rolanda defines the exact qualification criteria. Intellabooks builds the routing logic around your definition. Onboarding sequence fires automatically. Your team is notified. They enter your world feeling cared for before anyone picks up the phone. ↓ Tap to expand</div>
+          </div>
+          <div class="path-card p-navy" onclick="expandPath(this)">
+            <div class="path-num">03</div>
+            <div class="path-name">ASE Long Game</div>
+            <div class="path-desc">High-potential contacts building toward readiness. Kept warm. Always in the relationship.</div>
+            <div class="path-detail">Monthly touchpoints. Business value. Community wins. Masquerade invitation. The relationship stays warm until they are ready — and the system makes sure they always feel remembered. ↓ Tap to expand</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTRATION FLOW -->
+  <div class="section">
+    <span class="eyebrow gold">From Registration to Relationship</span>
+    <div class="pg-title">How Intellabooks Integrates<br>Into What You Already Have</div>
+    <p class="pg-sub">Your Square account stays exactly as it is. Intellabooks connects to it and takes over everything that happens after the payment — so your contacts never sit idle.</p>
+
+    <div class="flow">
+      <div class="flow-node gold"><div class="flow-icon">💳</div><div class="flow-label">Square</div><div class="flow-sub">Payment processes. $395 virtual · $445 in-person</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node navy"><div class="flow-icon">⚡</div><div class="flow-label">Intellabooks</div><div class="flow-sub">Contact created in your portal instantly</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node barbie"><div class="flow-icon">💬</div><div class="flow-label">SMS Fires</div><div class="flow-sub">Warm welcome within 60 seconds</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node green"><div class="flow-icon">✉️</div><div class="flow-label">Email Journey</div><div class="flow-sub">5-touch sequence starts immediately</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-icon">🔔</div><div class="flow-label">Your Team</div><div class="flow-sub">Internal alert sent right away</div></div>
+    </div>
+  </div>
+
+  <!-- EMAIL SEQUENCE -->
+  <div class="section">
+    <span class="eyebrow gold">The 5-Touch Pre-Event Email Journey</span>
+    <div class="accord">
+      <div class="accord-head" onclick="toggle(this)">
+        <div class="accord-head-left">
+          <div class="accord-icon gold">✉️</div>
+          <div><div class="accord-title">View the full email sequence — submitted for your approval</div><div class="accord-tag">Written in your voice · nothing live without your sign-off</div></div>
+        </div>
+        <div class="accord-chevron">▼</div>
+      </div>
+      <div class="accord-body">
+        <div class="email-seq">
+          <div class="email-touch">
+            <div class="touch-num">1</div>
+            <div class="touch-body"><div class="touch-timing">Immediately after registration</div><h4>"You made the right call."</h4><p>Confirms registration. Sets the tone. Introduces the BABIAD mission in your voice. Warm, not corporate. Feels like it came from someone who is genuinely glad they signed up.</p></div>
+          </div>
+          <div class="email-touch">
+            <div class="touch-num">2</div>
+            <div class="touch-body"><div class="touch-timing">3 days after registration</div><h4>"One thing to do before the event."</h4><p>A real, actionable business tip. No ask. Pure value. Builds trust before they ever walk through the door.</p></div>
+          </div>
+          <div class="email-touch">
+            <div class="touch-num">3</div>
+            <div class="touch-body"><div class="touch-timing">7 days before event</div><h4>"Here's your Saturday."</h4><p>Event flow overview. What to bring. Who will be in the room. What's possible by noon. Builds anticipation without over-explaining.</p></div>
+          </div>
+          <div class="email-touch">
+            <div class="touch-num">4</div>
+            <div class="touch-body"><div class="touch-timing">Evening before event</div><h4>"Tomorrow is yours."</h4><p>Final logistics. Excitement, not admin. Short. Human. Real.</p></div>
+          </div>
+          <div class="email-touch">
+            <div class="touch-num">5</div>
+            <div class="touch-body"><div class="touch-timing">7:00 AM event morning</div><h4>"Today is the day."</h4><p>Three sentences. One message. They feel seen before they ever walk through the door.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST EVENT -->
+  <div class="section">
+    <span class="eyebrow muted">When the Room Empties — The System Doesn't Stop</span>
+    <div class="flow">
+      <div class="flow-node gold"><div class="flow-icon">🏁</div><div class="flow-label">Doors Close</div><div class="flow-sub">Event ends. Engine fires.</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node navy"><div class="flow-icon">📊</div><div class="flow-label">Sort & Tag</div><div class="flow-sub">Every attendee tagged by path automatically</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node barbie"><div class="flow-icon">📝</div><div class="flow-label">Summary</div><div class="flow-sub">Personalized recap within 1 hour</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node green"><div class="flow-icon">💬</div><div class="flow-label">24hr Check-In</div><div class="flow-sub">Human-feeling SMS follow-up</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-icon">♾️</div><div class="flow-label">Forever</div><div class="flow-sub">Monthly value. Ball invite. Nobody dropped.</div></div>
+    </div>
+  </div>
+
+  <!-- PUBLISHING PRESENCE -->
+  <div class="section">
+    <span class="eyebrow barbie">Your Publishing Presence — Everywhere You Show Up</span>
+    <div class="pg-title">Every Platform. One Story.<br>All Building Toward November.</div>
+    <p class="pg-sub">Promote the monthly cohorts until your audience is inside the ecosystem — then the Masquerade Ball becomes the destination every post points toward. As November approaches, the Ball opens to the public beyond cohort attendees.</p>
+    <div class="platform-grid">
+      <div class="platform-card">
+        <div class="platform-icon">📸</div>
+        <div class="platform-name">Instagram</div>
+        <div class="platform-role">Primary brand home. Cohort recaps, attendee spotlights, Masquerade countdown. Story keyword triggers route to registration.</div>
+        <div class="platform-freq">3–4x weekly</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">💼</div>
+        <div class="platform-name">LinkedIn</div>
+        <div class="platform-role">B2B authority. Your leadership voice. SEROI data as content. Sponsor and partner outreach lives here.</div>
+        <div class="platform-freq">2–3x weekly</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">👥</div>
+        <div class="platform-name">Facebook & Meta</div>
+        <div class="platform-role">Community + paid reach. Local San Antonio targeting. Longer event stories. Retargeting anyone who visited your registration page.</div>
+        <div class="platform-freq">3x weekly</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">🎟️</div>
+        <div class="platform-name">Eventbrite</div>
+        <div class="platform-role">Official event listing for each cohort and Signature Week. Discovery platform for new audiences outside your existing network.</div>
+        <div class="platform-freq">Per event</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">𝕏</div>
+        <div class="platform-name">X (Twitter)</div>
+        <div class="platform-role">Real-time event coverage. Day-of energy. Masquerade countdown content. Reach business owners and community leaders in your market.</div>
+        <div class="platform-freq">Daily during events</div>
+      </div>
+      <div class="platform-card" style="background:linear-gradient(135deg,rgba(255,20,147,0.06),rgba(255,20,147,0.02));border-color:var(--barbie-border)">
+        <div class="platform-icon">🎭</div>
+        <div class="platform-name" style="color:rgba(180,0,90,0.85)">Masquerade Push</div>
+        <div class="platform-role" style="color:var(--muted)">From July 1 — all platforms shift toward the Ball. Ticket countdown. Award spotlights. "Will we see you in November?" becomes the unified CTA.</div>
+        <div class="platform-freq" style="background:rgba(200,0,100,0.06);color:rgba(180,0,90,0.8)">All platforms · July–Nov</div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+<div id="blueprint" class="page">
+
+  <div class="section">
+    <span class="eyebrow gold">The Blueprint</span>
+    <div class="pg-title">What Gets Built, Approved,<br>and Kept Safely in Your Portal</div>
+  </div>
+
+  <!-- PORTAL CARD -->
+  <div class="card" style="border:1px solid var(--bd);margin-bottom:1rem">
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.85rem;flex-wrap:wrap">
+      <span style="font-size:0.88rem;color:var(--muted)">Everything lives at</span>
+      <span class="portal-badge">portal.intellabooks.com</span>
+    </div>
+    <p>Every campaign draft, approval, report, and contact in your system lives in one place — your portal. You have full visibility, full access, and full ownership at every step. What comes in through Square flows straight here. What Intellabooks builds goes here for your review before it ever reaches a contact. Your data lives here and goes nowhere without your direction.</p>
+  </div>
+
+  <!-- COMPLIANCE ALERT -->
+  <div class="compliance-alert">
+    <div class="compliance-label">Confidentiality Agreement — Signed May 6, 2026</div>
+    <h4>Your Contacts Are Protected. Your Data Is Yours.</h4>
+    <p>The Intellabooks Confidentiality Agreement — signed by both parties on May 6, 2026 — is already in effect. Your contacts, business plans, client profiles, and all proprietary information are fully protected. Neither party may use or share the other's information without prior written consent.</p>
+    <div style="margin-top:0.85rem;cursor:pointer" onclick="toggleNDA()">
+      <div style="font-size:0.8rem;color:rgba(180,0,90,0.8);font-weight:600;display:flex;align-items:center;gap:0.5rem">
+        <span id="ndaArrow" style="transition:transform .25s;display:inline-block">▼</span>
+        Read what the agreement covers
+      </div>
+    </div>
+    <div id="ndaDetail" style="display:none;margin-top:0.85rem;padding-top:0.85rem;border-top:1px solid rgba(200,0,100,0.12)">
+      <p style="font-size:0.83rem;color:var(--muted);line-height:1.7;margin-bottom:0.75rem">The signed agreement legally confirms that all confidential information — including contact lists, business plans, client profiles, and proprietary data — is fully protected. Neither party may use or disclose the other's information without prior written consent. Your contacts cannot be sold, shared, or used outside of work you have directly authorized. They were always yours. They remain yours.</p>
+      <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#8B6400;font-weight:700;margin-bottom:0.5rem">What is covered</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.85;margin-bottom:0.85rem">Your contact lists and customer profiles · Your business plans and strategies · Your campaign content and messaging · Your incubator and foundation data · Intellabooks' systems and methodology — protected equally in the other direction.</div>
+      <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#8B6400;font-weight:700;margin-bottom:0.5rem">The plain commitment</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.85">Contacts are never sold · You can export everything anytime · If you ever leave, your data leaves with you · Intellabooks only accesses your system when you have directed it.</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(200,0,100,0.12)">
+      <div class="check-box" id="checkBox" onclick="acknowledgeCompliance()"><span class="checkmark">✓</span></div>
+      <span class="check-label" onclick="acknowledgeCompliance()">I have read and acknowledge the Data Protection Agreement</span>
+      <span class="check-status" id="checkStatus">Pending</span>
+    </div>
+  </div>
+
+  <!-- SECURITY LINK -->
+  <a href="intellabooks-security-overview.html" style="display:flex;align-items:center;gap:1rem;background:var(--white);border:1px solid var(--bd);border-left:3px solid var(--gold);border-radius:14px;padding:1rem 1.25rem;margin-bottom:1.5rem;text-decoration:none;box-shadow:0 3px 16px rgba(1,51,86,0.05);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 6px 24px rgba(1,51,86,0.1)'" onmouseout="this.style.boxShadow='0 3px 16px rgba(1,51,86,0.05)'">
+    <div style="width:38px;height:38px;border-radius:10px;background:var(--gold-light);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">🛡️</div>
+    <div style="flex:1">
+      <div style="font-size:0.88rem;font-weight:700;color:var(--navy);margin-bottom:0.15rem">Intellabooks Platform Security Overview</div>
+      <div style="font-size:0.75rem;color:var(--muted)">SOC 2 Type II · HIPAA-compliant · Enterprise-grade data protection · Full compliance documentation</div>
+    </div>
+    <div style="font-size:0.75rem;color:var(--gold);font-weight:600;white-space:nowrap">View →</div>
+  </a>
+
+  <div class="accord">
+    <div class="accord-head" onclick="toggle(this)">
+      <div class="accord-head-left"><div class="accord-icon gold">⚙️</div><div><div class="accord-title">System Setup — Your Sub-Account, Your Companies, One Portal</div><div class="accord-tag">One-time foundation · built before your first campaign sends</div></div></div>
+      <div class="accord-chevron">▼</div>
+    </div>
+    <div class="accord-body"><p>A dedicated sub-account built for Àṣé Advisory & Tech inside the Intellabooks platform. All of your companies organized under one portal. Square connected and tested. Domain and DNS authenticated. Admin email configured. Every technical foundation in place before the first campaign sends.</p></div>
+  </div>
+
+  <div class="accord">
+    <div class="accord-head" onclick="toggle(this)">
+      <div class="accord-head-left"><div class="accord-icon gold">✉️</div><div><div class="accord-title">Email & SMS Flows — Built for Your Approval</div><div class="accord-tag">Every draft submitted via your portal · nothing live without your sign-off</div></div></div>
+      <div class="accord-chevron">▼</div>
+    </div>
+    <div class="accord-body">
+      <p>Every sequence is written in your voice and submitted through your portal before it reaches anyone. You review, edit, and approve. Nothing goes live without your explicit sign-off.</p>
+      <ul>
+        <li><strong>Pre-event sequence</strong> — 5 emails from registration to morning-of</li>
+        <li><strong>Post-event summary</strong> — personalized recap within 1 hour of close</li>
+        <li><strong>Incubator onboarding</strong> — welcome and path sequence for qualified members</li>
+        <li><strong>Monthly community nurture</strong> — ongoing value emails to all contacts</li>
+        <li><strong>Masquerade campaign</strong> — ticket launch, countdown, finale communications</li>
+        <li><strong>SMS flows</strong> — registration confirmation, reminders, day-of, post-event check-in</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accord">
+    <div class="accord-head" onclick="toggle(this)">
+      <div class="accord-head-left"><div class="accord-icon navy">📊</div><div><div class="accord-title">Bi-Monthly Reporting — Always in Your Portal</div><div class="accord-tag">Numbers you can act on · delivered every 2 months</div></div></div>
+      <div class="accord-chevron">▼</div>
+    </div>
+    <div class="accord-body">
+      <ul>
+        <li><strong>Attendee conversion</strong> — registered vs. attended, per cohort</li>
+        <li><strong>Path routing summary</strong> — who went where and how they engaged</li>
+        <li><strong>Email and SMS performance</strong> — which touchpoints are resonating most</li>
+        <li><strong>Month-over-month momentum</strong> — building toward November</li>
+        <li><strong>SEROI data captured</strong> — businesses structured, milestones hit, impact measured</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:1.5rem">
+    <span class="eyebrow green">The Partnership Investment</span>
+    <table>
+      <tr><th>Service</th><th>Standard Value</th><th>Your Investment</th></tr>
+      <tr><td>Intellabooks Platform — full ecosystem</td><td><span class="strike">$2,400/month</span></td><td><span class="free-tag">Complimentary</span></td></tr>
+      <tr><td>Intellabooks PS — Alicia Martin, direct consulting + team</td><td><span class="strike">$200/hour + team</span></td><td><span class="free-tag">Complimentary</span></td></tr>
+    </table>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:0.65rem;font-style:italic;line-height:1.6">Provided in recognition of your introduction of Intellabooks to the BABIAD network and your commitment to this partnership.</p>
+  </div>
+
+</div>
+
+
+<div id="steps" class="page">
+
+  <div class="section">
+    <span class="eyebrow gold">Moving Together</span>
+    <div class="pg-title">The Action Plan</div>
+    <p class="pg-sub">The agreement is signed. The direction is clear. Here is the sequence — with timelines — from today to a fully live system running your first cohort.</p>
+  </div>
+
+  <div class="step-grid">
+
+    <div class="step-card barbie-step">
+      <div class="step-head" onclick="toggleStep(this)">
+        <div class="step-num">1</div>
+        <div class="step-head-body">
+          <div class="step-title">Acknowledge The Blueprint</div>
+          <div class="step-meta">A simple confirmation — verbal, email, or signature</div>
+        </div>
+        <div class="step-caret">▼</div>
+      </div>
+      <div class="step-detail">
+        <span class="step-timeline">Timeline — Immediately</span>
+        <p>This document sits alongside the Confidentiality Agreement signed May 6, 2026. A simple yes confirms both parties are aligned. You can find the full data protection detail and acknowledgment checkbox in the "Where You're Going" tab.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-head" onclick="toggleStep(this)">
+        <div class="step-num">2</div>
+        <div class="step-head-body">
+          <div class="step-title">Daily 15-minute check-ins begin</div>
+          <div class="step-meta">Morning momentum · information gathering · decisions made fast</div>
+        </div>
+        <div class="step-caret">▼</div>
+      </div>
+      <div class="step-detail">
+        <span class="step-timeline">Timeline — Starting this week · recurring daily</span>
+        <p>Fifteen minutes each morning to keep the build moving — gather what's needed, make quick decisions, and keep both sides aligned without long meetings. This is how systems get built efficiently. The daily rhythm replaces the need for back-and-forth and keeps momentum from launch through the first cohort.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-head" onclick="toggleStep(this)">
+        <div class="step-num">3</div>
+        <div class="step-head-body">
+          <div class="step-title">✨ Let's get you settled in — portal.intellabooks.com goes live</div>
+          <div class="step-meta">Sub-account built · all companies organized · login delivered to you</div>
+        </div>
+        <div class="step-caret">▼</div>
+      </div>
+      <div class="step-detail">
+        <span class="step-timeline">Timeline — Within 3 business days of Step 1</span>
+        <p>Your dedicated Àṣé Advisory & Tech sub-account is built and ready. All of your companies organized under one login. Your portal is where you review every draft, approve every campaign, check every report, and access your contact data anytime. Credentials delivered directly to you.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-head" onclick="toggleStep(this)">
+        <div class="step-num">4</div>
+        <div class="step-head-body">
+          <div class="step-title">🤝 Let us carry that for you — Square connects seamlessly</div>
+          <div class="step-meta">One-time setup · tested before anything reaches a contact · you keep Square exactly as it is</div>
+        </div>
+        <div class="step-caret">▼</div>
+      </div>
+      <div class="step-detail">
+        <span class="step-timeline">Timeline — Days 3–7 from portal launch</span>
+        <p>Your Square account connects to the Intellabooks platform — one-time setup, runs automatically from there. Every BABIAD registration paid through Square creates a contact in your portal within seconds. DNS authentication ensures every email lands in the inbox. Both are tested before any campaign sends.</p>
+      </div>
+    </div>
+
+    <!-- CONTACT TRANSITION EXPLAINER -->
+    <div class="card" style="background:rgba(255,182,193,0.06);border:1px solid rgba(255,133,162,0.18);border-left:3px solid rgba(200,0,100,0.3);margin-bottom:0.75rem">
+      <h4 style="color:var(--navy);margin-bottom:0.5rem">💛 A gentle note about your contacts</h4>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.75">We know your contact list is precious — it represents relationships you've built over years. Nobody is asking you to hand anything over. Here's what actually happens: Intellabooks will craft a warm, personal email invitation to your existing network, inviting them to register for BABIAD. They choose to come in. They arrive as attendees — not as transferred data. Every new registration from January forward flows in automatically through Square. Your people join because they want to, and that's the only way we'd ever want them there.</p>
+    </div>
+
+    <div class="step-card">
+      <div class="step-head" onclick="toggleStep(this)">
+        <div class="step-num">5</div>
+        <div class="step-head-body">
+          <div class="step-title">Bring your existing network in — on their terms</div>
+          <div class="step-meta">No bulk transfer needed · your people choose to be here</div>
+        </div>
+        <div class="step-caret">▼</div>
+      </div>
+      <div class="step-detail">
+        <span class="step-timeline">Timeline — Before first cohort</span>
+        <p>Rather than moving your existing contacts into the system directly, Intellabooks will draft a warm re-engagement email inviting your current network to register for BABIAD. They opt in by registering. They enter the system on their own terms — as attendees, not as transferred data. Every new BABIAD registration from January forward flows in automatically through Square. Your existing relationships join when they're ready, because they want to.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-head" onclick="toggleStep(this)">
+        <div class="step-num">6</div>
+        <div class="step-head-body">
+          <div class="step-title">First campaign drafts submitted for your approval</div>
+          <div class="step-meta">Via portal.intellabooks.com · your voice · your sign-off required</div>
+        </div>
+        <div class="step-caret">▼</div>
+      </div>
+      <div class="step-detail">
+        <span class="step-timeline">Timeline — Days 7–14 from portal launch</span>
+        <p>The pre-event email sequence, registration confirmation SMS, re-engagement invitation, and first month of social content — all drafted in your voice and submitted through your portal. You review, approve, or request edits. Nothing reaches a contact without your explicit sign-off.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="closing">
+    <h3>Àṣé means <em>"so it is."</em><br>So let it be.</h3>
+    <p>Everything in this document is already in motion. The NDA is signed. The vision is shared. The only thing left is to build — and Intellabooks is ready the moment you are, Rolanda.</p>
+    <div class="closing-cta">⚡ portal.intellabooks.com — Your system is waiting.</div>
+  </div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggle(head) {
+  const body = head.nextElementSibling;
+  const chevron = head.querySelector('.accord-chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+function toggleStep(head) {
+  const detail = head.nextElementSibling;
+  const caret = head.querySelector('.step-caret');
+  const isOpen = detail.classList.contains('open');
+  detail.classList.toggle('open', !isOpen);
+  caret.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+function expandPath(card) {
+  const isExp = card.classList.contains('expanded');
+  document.querySelectorAll('.path-card').forEach(c => c.classList.remove('expanded'));
+  if (!isExp) card.classList.add('expanded');
+}
+function toggleNDA() {
+  const detail = document.getElementById('ndaDetail');
+  const arrow = document.getElementById('ndaArrow');
+  const isOpen = detail.style.display !== 'none';
+  detail.style.display = isOpen ? 'none' : 'block';
+  arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+function acknowledgeCompliance() {
+  const box = document.getElementById('checkBox');
+  const status = document.getElementById('checkStatus');
+  box.classList.add('checked');
+  status.textContent = 'Acknowledged — ' + new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  status.classList.add('confirmed');
+}
+</script>
+
+</body>
+</html>
