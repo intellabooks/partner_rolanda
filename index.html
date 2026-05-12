@@ -228,6 +228,66 @@ td:first-child{color:var(--navy);font-weight:600}
 .verse{border-left:3px solid var(--gold);padding:0.9rem 1.25rem;font-style:italic;color:var(--muted);font-size:0.88rem;line-height:1.75;margin:1.5rem 0;background:rgba(212,175,55,0.04);border-radius:0 10px 10px 0}
 .verse cite{display:block;font-style:normal;font-size:0.68rem;color:#8B6400;font-weight:700;margin-top:0.4rem;letter-spacing:0.08em}
 .divider{height:1px;background:var(--bd);margin:2rem 0}
+
+/* VALUE CARDS — clickable specialist-cost reveals */
+.value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.65rem;margin-bottom:0.65rem;align-items:start}
+@media(max-width:640px){.value-grid{grid-template-columns:repeat(2,1fr)}}
+.value-card{background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04);cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s;position:relative}
+.value-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(1,51,86,0.09);border-color:rgba(255,20,147,0.25)}
+.value-card.expanded{border-color:rgba(255,20,147,0.35);background:linear-gradient(180deg,#fff 0%,rgba(255,20,147,0.03) 100%);box-shadow:0 6px 24px rgba(255,20,147,0.1)}
+.value-card .v-icon{font-size:1.5rem;margin-bottom:0.4rem}
+.value-card .v-name{font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem}
+.value-card .v-desc{font-size:0.65rem;color:var(--muted);line-height:1.45}
+.value-card .v-detail{display:none;margin-top:0.65rem;padding-top:0.65rem;border-top:1px dashed rgba(255,20,147,0.25);text-align:left}
+.value-card.expanded .v-detail{display:block}
+.value-card .v-detail-role{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#FF1493;font-weight:700;margin-bottom:0.25rem}
+.value-card .v-detail-cost{font-family:'Playfair Display',serif;font-size:0.92rem;color:var(--navy);font-weight:700;line-height:1.3;margin-bottom:0.25rem}
+.value-card .v-detail-note{font-size:0.62rem;color:var(--muted);line-height:1.5;font-style:italic}
+.value-card .v-tag{display:inline-block;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:#FF1493;font-weight:700;background:rgba(255,20,147,0.07);border-radius:100px;padding:0.15rem 0.55rem;margin-top:0.5rem}
+.value-card.expanded .v-tag{display:none}
+.value-summary{background:linear-gradient(135deg,rgba(255,20,147,0.06),rgba(212,175,55,0.04));border:1px solid rgba(255,20,147,0.22);border-radius:14px;padding:1rem 1.25rem;margin-top:0.5rem;display:flex;align-items:center;gap:0.85rem;flex-wrap:wrap}
+.value-summary-label{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#FF1493;font-weight:700;flex-shrink:0}
+.value-summary-total{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);font-weight:700}
+.value-summary-note{font-size:0.78rem;color:var(--muted);line-height:1.55;flex:1;min-width:200px}
+
+/* JOURNEY CHART — clickable storyline chapters */
+.journey-block{background:var(--white);border:1px solid var(--bd);border-radius:20px;padding:1.5rem 1.25rem 1.75rem;box-shadow:0 4px 24px rgba(1,51,86,0.06);margin-bottom:1rem;transition:box-shadow .2s}
+.journey-block.open{box-shadow:0 8px 32px rgba(1,51,86,0.09)}
+.journey-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;cursor:pointer;user-select:none;padding:0.25rem 0}
+.journey-header:hover .journey-title{color:#FF1493}
+.journey-header-text{flex:1}
+.journey-chevron{font-size:0.85rem;color:var(--muted);transition:transform .25s;flex-shrink:0;margin-top:0.35rem;line-height:1}
+.journey-block.open .journey-chevron{transform:rotate(180deg);color:#FF1493}
+.journey-body{display:none;margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--bd)}
+.journey-block.open .journey-body{display:block}
+.journey-eyebrow{font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:0.4rem;display:block}
+.journey-title{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2.3vw,1.55rem);color:var(--navy);line-height:1.22;margin-bottom:0.4rem;transition:color .2s}
+.journey-title-sub{font-size:0.78rem;color:var(--muted);line-height:1.6;margin-bottom:0.1rem}
+.journey-intro{font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;max-width:640px}
+.journey-strip{display:flex;gap:0.5rem;overflow-x:auto;padding-bottom:0.85rem;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:rgba(255,20,147,0.3) transparent}
+.journey-strip::-webkit-scrollbar{height:6px}
+.journey-strip::-webkit-scrollbar-thumb{background:rgba(255,20,147,0.25);border-radius:10px}
+.journey-chapter{flex:1;min-width:150px;background:rgba(1,51,86,0.025);border:1px solid var(--bd);border-radius:14px;padding:0.85rem 0.85rem 0.95rem;cursor:pointer;transition:all .2s;text-align:center;position:relative;scroll-snap-align:start}
+.journey-chapter:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(1,51,86,0.08);border-color:rgba(255,20,147,0.25)}
+.journey-chapter.active{background:linear-gradient(180deg,rgba(255,20,147,0.06),rgba(212,175,55,0.04));border-color:#FF1493;box-shadow:0 8px 24px rgba(255,20,147,0.12)}
+.journey-chapter.active::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:9px solid #FF1493}
+.j-num{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#FF1493;font-weight:700;margin-bottom:0.3rem;display:block}
+.journey-chapter:not(.active) .j-num{color:rgba(1,51,86,0.32)}
+.j-icon{font-size:1.4rem;margin-bottom:0.35rem;display:block}
+.j-title{font-size:0.8rem;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:0.2rem}
+.j-meta{font-size:0.66rem;color:var(--muted);line-height:1.4}
+.journey-detail-panels{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.journey-detail{display:none}
+.journey-detail.show{display:block}
+.journey-detail h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:0.4rem}
+.journey-detail .j-sub{font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:#FF1493;font-weight:700;margin-bottom:0.85rem;display:block}
+.journey-detail p{font-size:0.87rem;color:var(--muted);line-height:1.75;margin-bottom:0.85rem}
+.journey-detail .j-list{list-style:none;margin-top:0.5rem}
+.journey-detail .j-list li{font-size:0.85rem;color:var(--muted);padding:0.55rem 0;border-bottom:1px solid var(--bd);display:flex;align-items:flex-start;gap:0.65rem;line-height:1.6}
+.journey-detail .j-list li:last-child{border-bottom:none}
+.journey-detail .j-list li::before{content:"→";color:#FF1493;font-weight:700;flex-shrink:0}
+.journey-detail .j-list li strong{color:var(--navy)}
+.j-dm-tag{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);border-radius:100px;padding:0.25rem 0.75rem;font-size:0.62rem;color:#8B6400;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.5rem}
 </style>
 </head>
 <body>
@@ -236,8 +296,9 @@ td:first-child{color:var(--navy);font-weight:600}
 <div class="hero">
 <div class="hero-inner">
   <div class="hero-badge"><span></span>Intellabooks × Àṣé Advisory & Tech · May 2026</div>
+  <div style="display:inline-block;background:rgba(255,20,147,0.1);border:1px solid rgba(255,20,147,0.35);border-radius:100px;padding:0.3rem 1rem;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:#FF1493;font-weight:700;margin-bottom:1.5rem">💛 Built for you</div>
   <h1>Àṣé is Already Moving.<br><em>Now It Has an Engine.</em></h1>
-  <p class="hero-sub">Rolanda Anwar, you have built something rare — a full ecosystem that structures real businesses, creates measurable wealth in the African diaspora, and does it all with faith at the center. Intellabooks wraps around every layer of what you've built so the follow-through matches the vision.</p>
+  <p class="hero-sub">You have built something rare — a full ecosystem that structures real businesses, creates measurable wealth in the African diaspora, and does it all with faith at the center. Intellabooks wraps around every layer of what you've built so the reach can scale at the speed of your vision.</p>
 
   <!-- YEAR CALENDAR -->
   <div class="cal-wrap">
@@ -267,10 +328,10 @@ td:first-child{color:var(--navy);font-weight:600}
 
 <!-- NAV -->
 <nav class="nav">
-  <button class="nav-btn active" onclick="show('home',this)">Our Focus</button>
-  <button class="nav-btn" onclick="show('flow',this)">How We Get There</button>
-  <button class="nav-btn" onclick="show('blueprint',this)">The Blueprint</button>
-  <button class="nav-btn" onclick="show('steps',this)">Action Plan</button>
+  <button class="nav-btn active" onclick="show('home',this)">🌰 Seed</button>
+  <button class="nav-btn" onclick="show('flow',this)">💧 Water</button>
+  <button class="nav-btn" onclick="show('blueprint',this)">🌳 Grow</button>
+  <button class="nav-btn" onclick="show('steps',this)">🌟 Flourish</button>
 </nav>
 
 
@@ -289,220 +350,601 @@ td:first-child{color:var(--navy);font-weight:600}
     <p class="pg-sub">Intellabooks is the communication and relationship infrastructure running underneath everything Àṣé Advisory & Tech does. From the first time someone hears about BABIAD to the moment they become a protected, thriving business — every message, every follow-up, every milestone, every celebration is handled. Automatically. In your voice. With your contacts staying yours.</p>
   </div>
 
-  <!-- ICON GRID — MICRO LEVEL -->
+  <!-- VALUE CARDS — clickable specialist cost reveals -->
   <div class="section">
     <span class="eyebrow gold">What Intellabooks Runs Across Your Entire Ecosystem</span>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);;gap:0.65rem;margin-bottom:0.5rem">
-      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem">✉️</div>
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Email</div>
-        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Sequences, nurture, campaigns — all in your voice</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem">💬</div>
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">SMS</div>
-        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Confirmations, reminders, check-ins, celebrations</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem">📱</div>
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Social</div>
-        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Instagram, LinkedIn, Meta, X, Eventbrite</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem">📮</div>
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Direct Mail</div>
-        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Postcards, invitations, milestone mailers</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem">🗂️</div>
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">CRM</div>
-        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Every contact tagged, staged, and routed</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem">📋</div>
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Forms</div>
-        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Stage check-ins, grant applications, intake</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem">📊</div>
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Reporting</div>
-        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Bi-monthly performance and SEROI data</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--bd);border-radius:14px;padding:1rem 0.85rem;text-align:center;box-shadow:0 2px 12px rgba(1,51,86,0.04)">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem">✅</div>
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Approvals</div>
-        <div style="font-size:0.65rem;color:var(--muted);line-height:1.45">Every campaign reviewed by you before it sends</div>
-      </div>
-    </div>
-    <p style="font-size:0.78rem;color:var(--muted);font-style:italic;line-height:1.6">Click into each initiative below to see exactly how Intellabooks supports it.</p>
-  </div>
+    <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">Eight functions, one platform. <span style="color:var(--navy);font-weight:600">Tap any card to see what a specialist for just that one function would run.</span></p>
+    <div class="value-grid">
 
-  <!-- BABIAD -->
-  <div class="accord">
-    <div class="accord-head" onclick="toggle(this)">
-      <div class="accord-head-left">
-        <div class="accord-icon gold">🏛️</div>
-        <div><div class="accord-title">Build Your Business in a Day</div><div class="accord-tag">Excitement before they arrive · custom follow-up after they leave</div></div>
+      <div class="value-card" onclick="toggleValueCard(this)">
+        <div class="v-icon">✉️</div>
+        <div class="v-name">Email</div>
+        <div class="v-desc">Sequences, nurture, campaigns — all in your voice</div>
+        <div class="v-detail">
+          <div class="v-detail-role">Email Marketing Specialist</div>
+          <div class="v-detail-cost">$3,000–$6,000 / month</div>
+          <div class="v-detail-note">Strategy, copy, automation, segmentation, and deliverability — managed in-house.</div>
+        </div>
       </div>
-      <div class="accord-chevron">▼</div>
-    </div>
-    <div class="accord-body">
-      <p>BABIAD is the front door to the entire Àṣé ecosystem. Intellabooks makes sure that door opens with warmth — and stays open long after the event ends. The communication starts weeks before registration and continues through the full year.</p>
-      <span class="accord-body sub-label">Before They Even Register</span>
-      <ul>
-        <li><strong>Speaker teaser — Week 1</strong> — "Someone you need to hear from is joining us." Speaker 1 introduced with their story and what they're sharing. Social post + email + direct mail postcard to Rolanda's warm network.</li>
-        <li><strong>Agenda preview — Week 2</strong> — "Here's what you'll walk away knowing." Session topics revealed. What each breakout covers. The transformation available in one Saturday morning.</li>
-        <li><strong>Speaker reveal — Week 3</strong> — Speaker 2 and Speaker 3 introduced. Momentum building. Registration urgency feels natural, not manufactured.</li>
-        <li><strong>Final call — Week 4</strong> — "Seats are filling. Here's what's waiting for you." Last push across email, SMS, and social before the cohort closes.</li>
-      </ul>
-      <span class="accord-body sub-label">After Registration</span>
-      <ul>
-        <li><strong>Confirmation SMS</strong> — fires within 60 seconds of Square payment. Warm. Personal.</li>
-        <li><strong>5-touch email journey</strong> — value drop, what to expect, day-before logistics, morning-of energy.</li>
-        <li><strong>Day-of communications</strong> — check-in confirmation, session reminders, post-event summary within 1 hour.</li>
-      </ul>
-      <span class="accord-body sub-label">Custom Follow-Up by Business Stage</span>
-      <ul>
-        <li><strong>Pre-launch attendee</strong> — "Here's your next step toward making it real." Incubator introduction, entity formation resources, Legal Shield for protection from day one.</li>
-        <li><strong>Early-stage attendee</strong> — "You're building. Let's keep it moving." Systems, CRM, first client resources. Incubator qualification check.</li>
-        <li><strong>Established business</strong> — "Here's how we help businesses like yours grow." Intellabooks intro call offer. ASE high-ticket nurture begins.</li>
-        <li><strong>Growing business</strong> — "You're ready for what's next." Direct path to Intellabooks engagement and Legal Shield advanced coverage.</li>
-      </ul>
-      <span class="accord-body sub-label">Direct Mail</span>
-      <ul>
-        <li><strong>Pre-event postcard</strong> — mailed to Rolanda's warm network 3 weeks before each cohort. Event date, location, QR code to register. Physical presence in their hands.</li>
-        <li><strong>Post-event thank you card</strong> — mailed within 5 days of the event to every in-person attendee. Their name. A handwritten-feel message. The Masquerade Ball save-the-date on the back.</li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- INCUBATOR -->
-  <div class="accord">
-    <div class="accord-head" onclick="toggle(this)">
-      <div class="accord-head-left">
-        <div class="accord-icon gold">🌱</div>
-        <div><div class="accord-title">The Incubator</div><div class="accord-tag">Stage-based nurture · forms · check-ins · milestone progression</div></div>
+      <div class="value-card" onclick="toggleValueCard(this)">
+        <div class="v-icon">💬</div>
+        <div class="v-name">SMS</div>
+        <div class="v-desc">Confirmations, reminders, check-ins, celebrations</div>
+        <div class="v-detail">
+          <div class="v-detail-role">SMS Marketing Manager</div>
+          <div class="v-detail-cost">$2,500–$5,000 / month</div>
+          <div class="v-detail-note">Compliance, copy, send timing, and platform management — a real specialty.</div>
+        </div>
       </div>
-      <div class="accord-chevron">▼</div>
+
+      <div class="value-card" onclick="toggleValueCard(this)">
+        <div class="v-icon">📱</div>
+        <div class="v-name">Social</div>
+        <div class="v-desc">Instagram, LinkedIn, Meta, X, Eventbrite</div>
+        <div class="v-detail">
+          <div class="v-detail-role">Social Manager + Content Creator</div>
+          <div class="v-detail-cost">$4,500–$8,500 / month</div>
+          <div class="v-detail-note">Content, scheduling, community engagement, and reporting — across five platforms.</div>
+        </div>
+      </div>
+
+      <div class="value-card" onclick="toggleValueCard(this)">
+        <div class="v-icon">📮</div>
+        <div class="v-name">Direct Mail</div>
+        <div class="v-desc">Postcards, invitations, milestone mailers</div>
+        <div class="v-detail">
+          <div class="v-detail-role">Direct Mail Coordinator + Production</div>
+          <div class="v-detail-cost">$2,500–$5,000 / month</div>
+          <div class="v-detail-note">List management, design, print coordination, and fulfillment — handled end-to-end.</div>
+        </div>
+      </div>
+
+      <div class="value-card" onclick="toggleValueCard(this)">
+        <div class="v-icon">🗂️</div>
+        <div class="v-name">CRM</div>
+        <div class="v-desc">Every contact tagged, staged, and routed</div>
+        <div class="v-detail">
+          <div class="v-detail-role">CRM Administrator + Strategist</div>
+          <div class="v-detail-cost">$4,000–$8,000 / month</div>
+          <div class="v-detail-note">Schema, segmentation, automation logic, and ongoing data hygiene.</div>
+        </div>
+      </div>
+
+      <div class="value-card" onclick="toggleValueCard(this)">
+        <div class="v-icon">📋</div>
+        <div class="v-name">Forms</div>
+        <div class="v-desc">Stage check-ins, grant applications, intake</div>
+        <div class="v-detail">
+          <div class="v-detail-role">Workflow & Forms Specialist</div>
+          <div class="v-detail-cost">$1,800–$3,500 / month</div>
+          <div class="v-detail-note">Form design, conditional logic, integrations, and submission routing.</div>
+        </div>
+      </div>
+
+      <div class="value-card" onclick="toggleValueCard(this)">
+        <div class="v-icon">📊</div>
+        <div class="v-name">Reporting</div>
+        <div class="v-desc">Bi-monthly performance and SEROI data</div>
+        <div class="v-detail">
+          <div class="v-detail-role">Marketing Analyst</div>
+          <div class="v-detail-cost">$4,000–$8,000 / month</div>
+          <div class="v-detail-note">Dashboards, KPI tracking, impact reporting, and the storytelling behind the numbers.</div>
+        </div>
+      </div>
+
+      <div class="value-card" onclick="toggleValueCard(this)">
+        <div class="v-icon">✅</div>
+        <div class="v-name">Approvals</div>
+        <div class="v-desc">Every campaign reviewed by you before it sends</div>
+        <div class="v-detail">
+          <div class="v-detail-role">Marketing Ops Coordinator</div>
+          <div class="v-detail-cost">$3,000–$6,000 / month</div>
+          <div class="v-detail-note">Approval routing, version control, and keeping every send clean before it leaves the door.</div>
+        </div>
+      </div>
+
     </div>
-    <div class="accord-body">
-      <p>The incubator is where businesses go from idea to operating reality. Intellabooks runs alongside every member at every stage — not with generic check-ins, but with communication that knows exactly where they are and speaks to them there.</p>
-      <span class="accord-body sub-label">🌰 Stage 1 — Seedling · Pre-launch, idea phase</span>
-      <ul>
-        <li><strong>Welcome sequence</strong> — what the incubator offers, what's expected, what's possible</li>
-        <li><strong>Intake form</strong> — business idea, industry, goals, timeline. This data drives everything that follows.</li>
-        <li><strong>Week 2 check-in SMS</strong> — "How are you feeling about your business concept? We have a resource for you."</li>
-        <li><strong>Legal Shield introduction email</strong> — "Before you launch, protect what you're building." Entity formation, business structure guidance, contracts from day one.</li>
-        <li><strong>Foundation grant awareness email</strong> — scholarships and funding available for businesses at this stage.</li>
-        <li><strong>Direct mail</strong> — a welcome kit postcard with their incubator milestone roadmap printed on the back.</li>
-      </ul>
-      <span class="accord-body sub-label">🌿 Stage 2 — Rooted · Newly launched, first 90 days</span>
-      <ul>
-        <li><strong>30-day check-in form</strong> — "Where are you? What's working? What do you need?" Answers feed the next sequence.</li>
-        <li><strong>Systems nudge email</strong> — introducing CRM, payment processing, client communication tools</li>
-        <li><strong>60-day milestone SMS</strong> — "Two months in. Let's celebrate and keep it moving."</li>
-        <li><strong>Legal Shield follow-up</strong> — contract review, first employee questions, business license compliance</li>
-        <li><strong>90-day progress form</strong> — structured check-in that also qualifies them for Foundation grants</li>
-      </ul>
-      <span class="accord-body sub-label">🌳 Stage 3 — Growing · 6+ months, generating revenue</span>
-      <ul>
-        <li><strong>Bi-monthly check-in email</strong> — revenue progress, client count, what support they need next</li>
-        <li><strong>Marketing infrastructure introduction</strong> — this is where the Intellabooks offer becomes natural and relevant</li>
-        <li><strong>6-month milestone celebration</strong> — email + SMS + direct mail card marking the milestone. SEROI data captured.</li>
-        <li><strong>Legal Shield upgrade email</strong> — moving from basic to preferred coverage as the business complexity grows</li>
-        <li><strong>Masquerade Ball invitation</strong> — "You've built something real this year. Here's your seat at the table."</li>
-      </ul>
-      <span class="accord-body sub-label">🌟 Stage 4 — Flourishing · Established, scaling, ready for more</span>
-      <ul>
-        <li><strong>12-month celebration email + direct mail card</strong> — a real recognition moment. Named. Personal. Meaningful.</li>
-        <li><strong>ASE high-ticket pipeline introduction</strong> — the relationship is ready for a bigger conversation</li>
-        <li><strong>Intellabooks PS invitation</strong> — "Your business is ready for a full system. Let's talk."</li>
-        <li><strong>Legal Shield full coverage recommendation</strong> — civil litigation hours, IRS audit support, employee handbook</li>
-        <li><strong>SEROI award nomination</strong> — businesses at this stage are flagged as candidates for Masquerade Ball recognition</li>
-      </ul>
+
+    <div class="value-summary">
+      <div>
+        <div class="value-summary-label">💛 If you hired each specialist separately</div>
+        <div class="value-summary-total">around $25,000–$50,000 a month</div>
+      </div>
+      <div class="value-summary-note">All eight functions, working together, woven into one platform. Yours to use — and to send your network through — as part of our partnership.</div>
     </div>
   </div>
 
-  <!-- LEGAL SHIELD -->
-  <div class="accord">
-    <div class="accord-head" onclick="toggle(this)">
-      <div class="accord-head-left">
-        <div class="accord-icon navy">⚖️</div>
-        <div><div class="accord-title">Legal Shield</div><div class="accord-tag">Rolanda's protection business · introduced at the right moment in every journey</div></div>
+  <!-- BUSINESSES INTRO -->
+  <div class="section" style="margin-top:2rem;margin-bottom:1rem">
+    <span class="eyebrow gold">Your Businesses · Click Into Each One</span>
+    <p style="font-size:0.85rem;color:var(--muted);line-height:1.7;max-width:640px">Each of your businesses gets its own interactive story below. Tap any card to expand it — then tap any chapter inside to see the details of what Intellabooks runs at that point.</p>
+  </div>
+
+  <!-- BABIAD — INTERACTIVE JOURNEY CHART -->
+  <div class="journey-block">
+    <div class="journey-header" onclick="toggleBusiness(this)">
+      <div class="journey-header-text">
+        <span class="journey-eyebrow">🏛️ Build Your Business in a Day</span>
+        <div class="journey-title">The journey, week by week.</div>
+        <div class="journey-title-sub">5 chapters · pre-event buzz through custom follow-up</div>
       </div>
-      <div class="accord-chevron">▼</div>
+      <div class="journey-chevron">▼</div>
     </div>
-    <div class="accord-body">
-      <p>Legal Shield is one of Rolanda's businesses — and it's the most natural next step for every business owner who comes through the BABIAD and incubator ecosystem. LegalShield serves over 4 million members, giving access to experienced attorneys at a flat monthly fee instead of $250–$500 per hour — which is exactly what every small business owner in Rolanda's network needs and most can't currently access.</p>
-      <p style="margin-top:0.75rem">Intellabooks introduces Legal Shield at the right moment in every contact's journey — not as a pitch, but as a natural next step in building and protecting a real business.</p>
-      <span class="accord-body sub-label">How Intellabooks Introduces Legal Shield by Stage</span>
-      <ul>
-        <li><strong>Seedling stage</strong> — entity formation, business structure, contracts from day one. "Before you launch, protect what you're building."</li>
-        <li><strong>Rooted stage</strong> — contract review, business license compliance, first employee questions. "Your business is real now. Your protection should be too."</li>
-        <li><strong>Growing stage</strong> — debt collection letters, IRS consultation, trademark protection. "You've got something worth protecting."</li>
-        <li><strong>Flourishing stage</strong> — civil litigation hours, audit support, full business coverage. "This is what a protected business looks like."</li>
-        <li><strong>BABIAD attendees</strong> — introduced in the post-event follow-up sequence based on their business stage tag. Warm. Specific. Never generic.</li>
-      </ul>
-      <span class="accord-body sub-label">Direct Mail for Legal Shield</span>
-      <ul>
-        <li><strong>Postcard campaign</strong> — mailed to incubator members at the 30-day and 90-day mark. Plain language. What it covers. What it costs. QR code to sign up.</li>
-        <li><strong>Milestone mailer</strong> — at the 6-month business anniversary, a card goes out: "You've made it six months. Here's how to protect everything you've built." Legal Shield CTA on the back.</li>
-      </ul>
+    <div class="journey-body">
+    <p class="journey-intro">BABIAD is the front door to the entire Àṣé ecosystem. Intellabooks extends the warmth you bring at that door — and keeps the conversation going long after the event ends. Tap any chapter below to see what runs at that point in the journey.</p>
+
+    <div class="journey-strip">
+      <div class="journey-chapter active" data-ch="babiad-1" onclick="selectChapter(this,'babiad-1')">
+        <span class="j-num">Chapter 1</span>
+        <div class="j-icon">📣</div>
+        <div class="j-title">Pre-Event Buzz</div>
+        <div class="j-meta">Weeks 1–4 · build-up</div>
+      </div>
+      <div class="journey-chapter" data-ch="babiad-2" onclick="selectChapter(this,'babiad-2')">
+        <span class="j-num">Chapter 2</span>
+        <div class="j-icon">💳</div>
+        <div class="j-title">Registration</div>
+        <div class="j-meta">The yes · confirmation</div>
+      </div>
+      <div class="journey-chapter" data-ch="babiad-3" onclick="selectChapter(this,'babiad-3')">
+        <span class="j-num">Chapter 3</span>
+        <div class="j-icon">✉️</div>
+        <div class="j-title">Run-Up</div>
+        <div class="j-meta">5-touch email journey</div>
+      </div>
+      <div class="journey-chapter" data-ch="babiad-4" onclick="selectChapter(this,'babiad-4')">
+        <span class="j-num">Chapter 4</span>
+        <div class="j-icon">🎤</div>
+        <div class="j-title">Event Day & Recap</div>
+        <div class="j-meta">Day-of · 1-hour summary</div>
+      </div>
+      <div class="journey-chapter" data-ch="babiad-5" onclick="selectChapter(this,'babiad-5')">
+        <span class="j-num">Chapter 5</span>
+        <div class="j-icon">🌱</div>
+        <div class="j-title">Custom Follow-Up</div>
+        <div class="j-meta">By business stage</div>
+      </div>
+    </div>
+
+    <div class="journey-detail-panels">
+
+      <div class="journey-detail show" data-detail="babiad-1">
+        <span class="j-sub">Chapter 1 · The four weeks leading in</span>
+        <h4>Anticipation, built one week at a time.</h4>
+        <p>The four weeks before each cohort are a story in themselves. Each week introduces something new — a speaker, a session preview, a reason to lean forward — so registration urgency feels like momentum, not pressure.</p>
+        <ul class="j-list">
+          <li><strong>Speaker teaser — Week 1.</strong> "Someone you need to hear from is joining us." Speaker 1 introduced with their story and what they're sharing. Goes out across social + email + the pre-event postcard mailed to your warm network.</li>
+          <li><strong>Agenda preview — Week 2.</strong> "Here's what you'll walk away knowing." Session topics revealed. What each breakout covers. The transformation available in one Saturday morning.</li>
+          <li><strong>Speaker reveal — Week 3.</strong> Speakers 2 and 3 introduced. Momentum building. Registration urgency feels natural, never manufactured.</li>
+          <li><strong>Final call — Week 4.</strong> "Seats are filling. Here's what's waiting for you." Last push across email, SMS, and social before the cohort closes.</li>
+        </ul>
+        <span class="j-dm-tag">📮 Includes: Pre-event postcard, mailed 3 weeks out</span>
+      </div>
+
+      <div class="journey-detail" data-detail="babiad-2">
+        <span class="j-sub">Chapter 2 · The moment they say yes</span>
+        <h4>From payment to "we've got you" in 60 seconds.</h4>
+        <p>The first 60 seconds after someone registers set the tone for everything that follows. We make those seconds feel like an embrace — warm, personal, real.</p>
+        <ul class="j-list">
+          <li><strong>Confirmation SMS.</strong> Fires within 60 seconds of Square payment. Warm. Personal. Reads like it came from you, because the voice is yours.</li>
+          <li><strong>Confirmation email.</strong> Sent in the same moment with full event details — and the opening line of the 5-touch email journey that follows.</li>
+          <li><strong>Internal alert.</strong> Your team is notified the moment a new registration lands, with full context already in place.</li>
+        </ul>
+      </div>
+
+      <div class="journey-detail" data-detail="babiad-3">
+        <span class="j-sub">Chapter 3 · From registration to the morning of</span>
+        <h4>Five emails that build the room before anyone arrives.</h4>
+        <p>From the moment they pay to the moment they walk in, five touches arrive at exactly the right times — never too many, never silent. Each one is short, warm, and written in your voice.</p>
+        <ul class="j-list">
+          <li><strong>Email 1 — immediately.</strong> "You made the right call." Confirms registration. Sets the tone.</li>
+          <li><strong>Email 2 — 3 days in.</strong> "One thing to do before the event." A real, actionable tip. Pure value, no ask.</li>
+          <li><strong>Email 3 — 7 days out.</strong> "Here's your Saturday." Event flow, who'll be in the room, what's possible by noon.</li>
+          <li><strong>Email 4 — evening before.</strong> "Tomorrow is yours." Final logistics. Excitement, not admin.</li>
+          <li><strong>Email 5 — 7 AM event morning.</strong> "Today is the day." Three sentences. One message. They feel seen before they ever walk through the door.</li>
+        </ul>
+      </div>
+
+      <div class="journey-detail" data-detail="babiad-4">
+        <span class="j-sub">Chapter 4 · The day itself and the recap that follows</span>
+        <h4>The room. The recap. The thank-you card in the mail.</h4>
+        <p>Event day moves fast. The system moves with it — confirming check-ins, sending session reminders, and putting a personalized recap in their inbox within an hour of the close.</p>
+        <ul class="j-list">
+          <li><strong>Day-of check-in confirmation.</strong> Texted on arrival. "You made it. So glad you're here."</li>
+          <li><strong>Session reminders.</strong> Sent at the right times across the morning.</li>
+          <li><strong>Post-event summary.</strong> Personalized recap email lands within 1 hour of the event closing.</li>
+          <li><strong>Tagging happens in the background.</strong> Every attendee is sorted by business stage automatically, so Chapter 5 already knows where to take them.</li>
+        </ul>
+        <span class="j-dm-tag">📮 Includes: Thank-you card mailed within 5 days · Masquerade Ball save-the-date on the back</span>
+      </div>
+
+      <div class="journey-detail" data-detail="babiad-5">
+        <span class="j-sub">Chapter 5 · Four paths, one set of stages</span>
+        <h4>Every attendee gets exactly the next step they're ready for.</h4>
+        <p>BABIAD attendees don't all need the same follow-up. A pre-launch dreamer needs different language than an established business. Intellabooks routes each person into the path that matches the stage they're actually in — automatically, in your voice.</p>
+        <ul class="j-list">
+          <li><strong>Pre-launch attendee.</strong> "Here's your next step toward making it real." Incubator introduction, entity formation resources, LegalShield for protection from day one.</li>
+          <li><strong>Early-stage attendee.</strong> "You're building. Let's keep it moving." Systems, CRM, first client resources. Incubator qualification check.</li>
+          <li><strong>Established business.</strong> "Here's how we help businesses like yours grow." Intellabooks intro call offer. ASE high-ticket nurture begins.</li>
+          <li><strong>Growing business.</strong> "You're ready for what's next." Direct path to Intellabooks engagement and LegalShield advanced coverage.</li>
+        </ul>
+      </div>
+
+    </div>
     </div>
   </div>
 
-  <!-- FOUNDATION & SEROI -->
-  <div class="accord">
-    <div class="accord-head" onclick="toggle(this)">
-      <div class="accord-head-left">
-        <div class="accord-icon navy">🌍</div>
-        <div><div class="accord-title">Àṣé Foundation & SEROI</div><div class="accord-tag">Impact tracked · grants surfaced · milestones celebrated</div></div>
+  <!-- INCUBATOR — INTERACTIVE STAGE PROGRESSION -->
+  <div class="journey-block">
+    <div class="journey-header" onclick="toggleBusiness(this)">
+      <div class="journey-header-text">
+        <span class="journey-eyebrow">🌱 The Incubator</span>
+        <div class="journey-title">From idea to operating reality.</div>
+        <div class="journey-title-sub">4 stages · Seedling through Flourishing</div>
       </div>
-      <div class="accord-chevron">▼</div>
+      <div class="journey-chevron">▼</div>
     </div>
-    <div class="accord-body">
-      <p>The Foundation is the long-term mission underneath everything. Intellabooks makes sure the impact is always visible — by capturing milestone data, surfacing grant opportunities at the right moment, and making sure every business that qualifies knows what's available to them.</p>
-      <span class="accord-body sub-label">What Intellabooks Tracks and Surfaces</span>
-      <ul>
-        <li><strong>Business structure milestone</strong> — when a Seedling formally structures their business, the system logs it and sends a Foundation grant awareness email</li>
-        <li><strong>90-day operating milestone</strong> — grant qualification form sent automatically. No one misses an opportunity because they didn't know to ask.</li>
-        <li><strong>6-month milestone</strong> — SEROI data captured. Business counted in the impact report. Email + direct mail celebration sent.</li>
-        <li><strong>12-month milestone</strong> — SEROI award nomination flagged. Business featured in the Masquerade Ball recognition.</li>
-        <li><strong>Annual SEROI report</strong> — Intellabooks compiles the data across all contacts and delivers a clean report for Rolanda — businesses structured, jobs protected, revenue created, families protected through Legal Shield.</li>
-      </ul>
-      <span class="accord-body sub-label">Direct Mail</span>
-      <ul>
-        <li><strong>Grant notification postcard</strong> — mailed when a contact qualifies for a Foundation scholarship or grant. Physical. Real. Memorable.</li>
-        <li><strong>Impact anniversary card</strong> — sent at the 12-month mark to every active incubator member. Their name. Their milestone. The community they're part of.</li>
-      </ul>
+    <div class="journey-body">
+    <p class="journey-intro">Intellabooks walks alongside every incubator member at every stage — not with generic check-ins, but with communication that knows exactly where they are and speaks to them there. Tap any stage to see what runs at that point in their growth.</p>
+
+    <div class="journey-strip">
+      <div class="journey-chapter active" data-ch="inc-1" onclick="selectChapter(this,'inc-1')">
+        <span class="j-num">Stage 1</span>
+        <div class="j-icon">🌰</div>
+        <div class="j-title">Seedling</div>
+        <div class="j-meta">Pre-launch · idea phase</div>
+      </div>
+      <div class="journey-chapter" data-ch="inc-2" onclick="selectChapter(this,'inc-2')">
+        <span class="j-num">Stage 2</span>
+        <div class="j-icon">🌿</div>
+        <div class="j-title">Rooted</div>
+        <div class="j-meta">First 90 days</div>
+      </div>
+      <div class="journey-chapter" data-ch="inc-3" onclick="selectChapter(this,'inc-3')">
+        <span class="j-num">Stage 3</span>
+        <div class="j-icon">🌳</div>
+        <div class="j-title">Growing</div>
+        <div class="j-meta">6+ months · earning</div>
+      </div>
+      <div class="journey-chapter" data-ch="inc-4" onclick="selectChapter(this,'inc-4')">
+        <span class="j-num">Stage 4</span>
+        <div class="j-icon">🌟</div>
+        <div class="j-title">Flourishing</div>
+        <div class="j-meta">Established · scaling</div>
+      </div>
+    </div>
+
+    <div class="journey-detail-panels">
+
+      <div class="journey-detail show" data-detail="inc-1">
+        <span class="j-sub">Stage 1 · Seedling — pre-launch, idea phase</span>
+        <h4>"Before you launch, here's what you're building on."</h4>
+        <p>The Seedling stage is where excitement meets foundation. Welcome warm. Capture the idea. Plant the first protective pieces — entity, contracts, the Foundation's awareness of them.</p>
+        <ul class="j-list">
+          <li><strong>Welcome sequence.</strong> What the incubator offers, what's expected, what's possible.</li>
+          <li><strong>Intake form.</strong> Business idea, industry, goals, timeline. This data drives everything that follows.</li>
+          <li><strong>Week 2 check-in SMS.</strong> "How are you feeling about your business concept? We have a resource for you."</li>
+          <li><strong>LegalShield introduction email.</strong> "Before you launch, protect what you're building." Entity formation, business structure guidance, contracts from day one.</li>
+          <li><strong>Foundation grant awareness email.</strong> Scholarships and funding available for businesses at this stage.</li>
+        </ul>
+        <span class="j-dm-tag">📮 Includes: Welcome kit postcard with their incubator milestone roadmap on the back</span>
+      </div>
+
+      <div class="journey-detail" data-detail="inc-2">
+        <span class="j-sub">Stage 2 · Rooted — newly launched, first 90 days</span>
+        <h4>"You're real now. Let's keep you moving."</h4>
+        <p>Rooted is where structure becomes muscle. The first 90 days have rhythm — check-ins that ask the right questions, systems introduced at the right moment, and a 90-day progress form that doubles as a grant-qualification gate.</p>
+        <ul class="j-list">
+          <li><strong>30-day check-in form.</strong> "Where are you? What's working? What do you need?" Answers feed the next sequence.</li>
+          <li><strong>Systems nudge email.</strong> Introducing CRM, payment processing, client communication tools.</li>
+          <li><strong>60-day milestone SMS.</strong> "Two months in. Let's celebrate and keep it moving."</li>
+          <li><strong>LegalShield follow-up.</strong> Contract review, first employee questions, business license compliance.</li>
+          <li><strong>90-day progress form.</strong> Structured check-in that also qualifies them for Foundation grants.</li>
+        </ul>
+      </div>
+
+      <div class="journey-detail" data-detail="inc-3">
+        <span class="j-sub">Stage 3 · Growing — 6+ months, generating revenue</span>
+        <h4>"You've got something. Let's grow it."</h4>
+        <p>The Growing stage is where the conversations get bigger. Marketing infrastructure introduced naturally — because it's now needed. SEROI data captured. The first Masquerade invitation arrives.</p>
+        <ul class="j-list">
+          <li><strong>Bi-monthly check-in email.</strong> Revenue progress, client count, what support they need next.</li>
+          <li><strong>Marketing infrastructure introduction.</strong> This is where the Intellabooks offer becomes natural and relevant.</li>
+          <li><strong>6-month milestone celebration.</strong> Email + SMS + direct mail card marking the milestone. SEROI data captured.</li>
+          <li><strong>LegalShield upgrade email.</strong> Moving from basic to preferred coverage as the business complexity grows.</li>
+          <li><strong>Masquerade Ball invitation.</strong> "You've built something real this year. Here's your seat at the table."</li>
+        </ul>
+        <span class="j-dm-tag">📮 Includes: 6-month milestone celebration card</span>
+      </div>
+
+      <div class="journey-detail" data-detail="inc-4">
+        <span class="j-sub">Stage 4 · Flourishing — established, scaling, ready for more</span>
+        <h4>"You did it. And we want to celebrate you."</h4>
+        <p>Flourishing is the celebration stage. A real anniversary card lands. Bigger conversations open. SEROI award nominations are flagged. Every signal says: <em>you're not just surviving — you're an example.</em></p>
+        <ul class="j-list">
+          <li><strong>12-month celebration email + direct mail card.</strong> A real recognition moment. Named. Personal. Meaningful.</li>
+          <li><strong>ASE high-ticket pipeline introduction.</strong> The relationship is ready for a bigger conversation.</li>
+          <li><strong>Intellabooks PS invitation.</strong> "Your business is ready for a full system. Let's talk."</li>
+          <li><strong>LegalShield full coverage recommendation.</strong> Civil litigation hours, IRS audit support, employee handbook.</li>
+          <li><strong>SEROI award nomination.</strong> Businesses at this stage are flagged as candidates for Masquerade Ball recognition.</li>
+        </ul>
+        <span class="j-dm-tag">📮 Includes: 12-month celebration anniversary card</span>
+      </div>
+
+    </div>
     </div>
   </div>
 
-  <!-- MASQUERADE -->
-  <div class="accord">
-    <div class="accord-head" onclick="toggle(this)">
-      <div class="accord-head-left">
-        <div class="accord-icon gold">🎭</div>
-        <div><div class="accord-title" style="color:rgba(180,0,90,0.85)">Masquerade Ball Finale — November 7, 2026</div><div class="accord-tag">The destination every campaign builds toward · all year long</div></div>
+  <!-- LEGALSHIELD — INTERACTIVE STAGE TOUCHPOINTS -->
+  <div class="journey-block">
+    <div class="journey-header" onclick="toggleBusiness(this)">
+      <div class="journey-header-text">
+        <span class="journey-eyebrow">⚖️ LegalShield</span>
+        <div class="journey-title">Your protection business, introduced when it matters most.</div>
+        <div class="journey-title-sub">5 touchpoints · stage-tagged across every contact's journey</div>
       </div>
-      <div class="accord-chevron">▼</div>
+      <div class="journey-chevron">▼</div>
     </div>
-    <div class="accord-body">
-      <p>Every email sent. Every SMS delivered. Every postcard mailed. Every social post published. All year long, they build toward one night. The Masquerade Ball is the celebration of every business that showed up, did the work, and built something real in 2026.</p>
-      <span class="accord-body sub-label">How Intellabooks Builds the Campaign All Year</span>
-      <ul>
-        <li><strong>Q1 — January through March</strong> — cohorts promoted. Community introduced. The Ball teased as "something is coming in November."</li>
-        <li><strong>Q2 — April through June</strong> — real results from Q1 cohorts shared publicly. SEROI metrics released. Ball announced. Social momentum growing.</li>
-        <li><strong>July 1 — Ticket launch</strong> — email, SMS, and direct mail save-the-date mailed to all contacts simultaneously. Every incubator member gets a personal invitation.</li>
-        <li><strong>Q3 — July through September</strong> — all platforms shift toward the Ball. Countdown begins. Attendee spotlights. Award nominations opened.</li>
-        <li><strong>Q4 — October and November</strong> — final cohort. Full push. Ball opens to the public. Every post is a countdown. The evening arrives.</li>
-      </ul>
-      <span class="accord-body sub-label">Direct Mail for the Ball</span>
-      <ul>
-        <li><strong>Save-the-date card</strong> — mailed July 1 to every contact in the ecosystem. Elegant. Event-worthy. Makes the Ball feel real before they've bought a ticket.</li>
-        <li><strong>Formal invitation mailer</strong> — mailed September 1 to qualified incubator members and BABIAD alumni. Their name on the envelope. The evening described. A QR code to purchase their seat.</li>
-        <li><strong>Award nominee notification</strong> — a personal card mailed to each nominated business. "You've been recognized." The categories. The evening. The meaning of the moment.</li>
-      </ul>
+    <div class="journey-body">
+    <p class="journey-intro">LegalShield is one of your businesses — and the most natural next step for every business owner who comes through the BABIAD and incubator ecosystem. Flat-monthly attorney access where most owners would otherwise face $250–$500 an hour. Intellabooks introduces it at the right moment in each person's journey — never as a pitch, always as a next step. Tap any stage to see exactly what gets introduced.</p>
+
+    <div class="journey-strip">
+      <div class="journey-chapter active" data-ch="ls-1" onclick="selectChapter(this,'ls-1')">
+        <span class="j-num">Touchpoint 1</span>
+        <div class="j-icon">🌰</div>
+        <div class="j-title">Seedling</div>
+        <div class="j-meta">Before launch</div>
+      </div>
+      <div class="journey-chapter" data-ch="ls-2" onclick="selectChapter(this,'ls-2')">
+        <span class="j-num">Touchpoint 2</span>
+        <div class="j-icon">🌿</div>
+        <div class="j-title">Rooted</div>
+        <div class="j-meta">Newly real</div>
+      </div>
+      <div class="journey-chapter" data-ch="ls-3" onclick="selectChapter(this,'ls-3')">
+        <span class="j-num">Touchpoint 3</span>
+        <div class="j-icon">🌳</div>
+        <div class="j-title">Growing</div>
+        <div class="j-meta">Worth protecting</div>
+      </div>
+      <div class="journey-chapter" data-ch="ls-4" onclick="selectChapter(this,'ls-4')">
+        <span class="j-num">Touchpoint 4</span>
+        <div class="j-icon">🌟</div>
+        <div class="j-title">Flourishing</div>
+        <div class="j-meta">Full protection</div>
+      </div>
+      <div class="journey-chapter" data-ch="ls-5" onclick="selectChapter(this,'ls-5')">
+        <span class="j-num">Touchpoint 5</span>
+        <div class="j-icon">🏛️</div>
+        <div class="j-title">BABIAD Attendees</div>
+        <div class="j-meta">Post-event follow-up</div>
+      </div>
+    </div>
+
+    <div class="journey-detail-panels">
+
+      <div class="journey-detail show" data-detail="ls-1">
+        <span class="j-sub">Seedling · Pre-launch protection</span>
+        <h4>"Before you launch, protect what you're building."</h4>
+        <p>The very first conversation about LegalShield happens before there's even a business to defend — when foundations are still being poured.</p>
+        <ul class="j-list">
+          <li><strong>Entity formation guidance.</strong> What kind of business structure to form, and why.</li>
+          <li><strong>Contracts from day one.</strong> Templates and review for the first agreements they'll sign.</li>
+          <li><strong>Plain-English protection.</strong> "Here's what you're covered for, here's what it costs, here's why it matters before launch."</li>
+        </ul>
+      </div>
+
+      <div class="journey-detail" data-detail="ls-2">
+        <span class="j-sub">Rooted · Your business is real now</span>
+        <h4>"Your business is real now. Your protection should be too."</h4>
+        <p>In the first 90 days, the legal questions get specific — and LegalShield is the answer for owners who can't yet justify a $400-an-hour attorney on retainer.</p>
+        <ul class="j-list">
+          <li><strong>Contract review.</strong> Real attorneys reviewing real client agreements.</li>
+          <li><strong>Business license compliance.</strong> What licenses you need, when they renew, what fines to avoid.</li>
+          <li><strong>First employee questions.</strong> 1099 vs W-2, handbook basics, the protection they need before hire #1.</li>
+        </ul>
+        <span class="j-dm-tag">📮 Includes: 30-day and 90-day postcard campaign with QR sign-up</span>
+      </div>
+
+      <div class="journey-detail" data-detail="ls-3">
+        <span class="j-sub">Growing · You've got something worth protecting</span>
+        <h4>"You've built something real. Let's make sure it stays yours."</h4>
+        <p>Growing businesses encounter different legal needs — bigger contracts, IP questions, the occasional collection letter. LegalShield steps up with them.</p>
+        <ul class="j-list">
+          <li><strong>Debt collection letters.</strong> When a client doesn't pay, attorneys put the right pressure in the right way.</li>
+          <li><strong>IRS consultation.</strong> Before a problem becomes a crisis.</li>
+          <li><strong>Trademark protection.</strong> Brand assets become defensible.</li>
+        </ul>
+        <span class="j-dm-tag">📮 Includes: 6-month anniversary milestone mailer</span>
+      </div>
+
+      <div class="journey-detail" data-detail="ls-4">
+        <span class="j-sub">Flourishing · Full business coverage</span>
+        <h4>"This is what a protected business looks like."</h4>
+        <p>Established businesses get the full LegalShield small-business plan — the kind of protection that used to require an in-house counsel.</p>
+        <ul class="j-list">
+          <li><strong>Civil litigation hours.</strong> Hours of attorney time included for active disputes.</li>
+          <li><strong>Audit support.</strong> IRS audit-handling included.</li>
+          <li><strong>Full coverage upgrades.</strong> Employee handbook review, complex contracts, ongoing counsel.</li>
+        </ul>
+      </div>
+
+      <div class="journey-detail" data-detail="ls-5">
+        <span class="j-sub">BABIAD attendees · The right intro at the right moment</span>
+        <h4>Stage-tagged so the intro lands warm.</h4>
+        <p>Every BABIAD attendee is automatically tagged by business stage in the post-event sequence. LegalShield is introduced in their follow-up at the level that fits where they are — pre-launch language for pre-launch dreamers, complex-business language for established owners. Same product, five very different conversations.</p>
+      </div>
+
+    </div>
+    </div>
+  </div>
+
+  <!-- FOUNDATION & SEROI — INTERACTIVE MILESTONE TRACKER -->
+  <div class="journey-block">
+    <div class="journey-header" onclick="toggleBusiness(this)">
+      <div class="journey-header-text">
+        <span class="journey-eyebrow">🌍 Àṣé Foundation & SEROI</span>
+        <div class="journey-title">The impact, made visible — milestone by milestone.</div>
+        <div class="journey-title-sub">5 milestones · structure through the annual SEROI report</div>
+      </div>
+      <div class="journey-chevron">▼</div>
+    </div>
+    <div class="journey-body">
+    <p class="journey-intro">The Foundation is the long-term mission underneath everything. Intellabooks gives the impact you're creating a clear way to see itself — capturing milestone data, surfacing grant opportunities at exactly the right moment, and making it effortless for every qualifying business to know what's available to them. Tap any milestone to see what gets tracked and what gets sent.</p>
+
+    <div class="journey-strip">
+      <div class="journey-chapter active" data-ch="fnd-1" onclick="selectChapter(this,'fnd-1')">
+        <span class="j-num">Milestone 1</span>
+        <div class="j-icon">📜</div>
+        <div class="j-title">Business Structure</div>
+        <div class="j-meta">First formal registration</div>
+      </div>
+      <div class="journey-chapter" data-ch="fnd-2" onclick="selectChapter(this,'fnd-2')">
+        <span class="j-num">Milestone 2</span>
+        <div class="j-icon">📅</div>
+        <div class="j-title">90-Day Operating</div>
+        <div class="j-meta">Grant qualification</div>
+      </div>
+      <div class="journey-chapter" data-ch="fnd-3" onclick="selectChapter(this,'fnd-3')">
+        <span class="j-num">Milestone 3</span>
+        <div class="j-icon">🎉</div>
+        <div class="j-title">6-Month Mark</div>
+        <div class="j-meta">SEROI data captured</div>
+      </div>
+      <div class="journey-chapter" data-ch="fnd-4" onclick="selectChapter(this,'fnd-4')">
+        <span class="j-num">Milestone 4</span>
+        <div class="j-icon">🏆</div>
+        <div class="j-title">12-Month Mark</div>
+        <div class="j-meta">SEROI award nomination</div>
+      </div>
+      <div class="journey-chapter" data-ch="fnd-5" onclick="selectChapter(this,'fnd-5')">
+        <span class="j-num">Annual</span>
+        <div class="j-icon">📊</div>
+        <div class="j-title">SEROI Report</div>
+        <div class="j-meta">Your year in numbers</div>
+      </div>
+    </div>
+
+    <div class="journey-detail-panels">
+
+      <div class="journey-detail show" data-detail="fnd-1">
+        <span class="j-sub">Milestone 1 · Business Structure</span>
+        <h4>The first time something gets official.</h4>
+        <p>When a Seedling member formally structures their business — LLC, sole prop, corp — the system logs it as a milestone and triggers the Foundation grant awareness email. The moment they're a real business is the moment they hear what's available to them.</p>
+      </div>
+
+      <div class="journey-detail" data-detail="fnd-2">
+        <span class="j-sub">Milestone 2 · 90-Day Operating</span>
+        <h4>"You've been at this for three months. Let's see what you qualify for."</h4>
+        <p>The 90-day mark triggers a grant qualification form automatically. Surfaced at exactly the right moment so every qualifying business knows what's available to them.</p>
+      </div>
+
+      <div class="journey-detail" data-detail="fnd-3">
+        <span class="j-sub">Milestone 3 · 6-Month Mark</span>
+        <h4>SEROI data captured. Impact celebrated.</h4>
+        <p>At six months, the business is counted in the impact report. Email + direct mail celebration card go out. The community sees them. They see themselves in the community.</p>
+        <span class="j-dm-tag">📮 Includes: 6-month celebration card</span>
+      </div>
+
+      <div class="journey-detail" data-detail="fnd-4">
+        <span class="j-sub">Milestone 4 · 12-Month Mark</span>
+        <h4>"You made it a year. Time for the spotlight."</h4>
+        <p>At twelve months, the business is flagged for SEROI award nomination and tagged for Masquerade Ball recognition. An impact anniversary card lands in the mail with their name on it.</p>
+        <span class="j-dm-tag">📮 Includes: Impact anniversary card · Grant notification postcard when qualified</span>
+      </div>
+
+      <div class="journey-detail" data-detail="fnd-5">
+        <span class="j-sub">Annual · The SEROI Report</span>
+        <h4>One clean report. The whole year, summarized.</h4>
+        <p>At year-end, Intellabooks compiles the data across all contacts and delivers a clean report — businesses structured, jobs created, revenue protected through LegalShield, families covered, grants distributed. The Foundation's impact, made tangible. Yours to publish, share, and build on.</p>
+      </div>
+
+    </div>
+    </div>
+  </div>
+
+  <!-- MASQUERADE — INTERACTIVE YEAR-LONG TIMELINE -->
+  <div class="journey-block" style="background:linear-gradient(180deg,#fff,rgba(255,20,147,0.025));border-color:rgba(255,20,147,0.2)">
+    <div class="journey-header" onclick="toggleBusiness(this)">
+      <div class="journey-header-text">
+        <span class="journey-eyebrow" style="color:#FF1493">🎭 Masquerade Ball Finale — November 7, 2026</span>
+        <div class="journey-title">The destination every campaign builds toward.</div>
+        <div class="journey-title-sub">5 phases · Q1 through the night itself</div>
+      </div>
+      <div class="journey-chevron">▼</div>
+    </div>
+    <div class="journey-body">
+    <p class="journey-intro">Every email sent. Every SMS delivered. Every postcard mailed. Every social post published. All year long, they build toward one night. The Masquerade Ball is the celebration of every business that showed up, did the work, and built something real in 2026. Tap any phase to see how the campaign builds.</p>
+
+    <div class="journey-strip">
+      <div class="journey-chapter active" data-ch="msq-1" onclick="selectChapter(this,'msq-1')">
+        <span class="j-num">Phase 1</span>
+        <div class="j-icon">🌱</div>
+        <div class="j-title">Q1 · Jan–Mar</div>
+        <div class="j-meta">Cohorts + tease</div>
+      </div>
+      <div class="journey-chapter" data-ch="msq-2" onclick="selectChapter(this,'msq-2')">
+        <span class="j-num">Phase 2</span>
+        <div class="j-icon">📣</div>
+        <div class="j-title">Q2 · Apr–Jun</div>
+        <div class="j-meta">Announce + results</div>
+      </div>
+      <div class="journey-chapter" data-ch="msq-3" onclick="selectChapter(this,'msq-3')">
+        <span class="j-num">Phase 3</span>
+        <div class="j-icon">🎟️</div>
+        <div class="j-title">July 1</div>
+        <div class="j-meta">Ticket launch</div>
+      </div>
+      <div class="journey-chapter" data-ch="msq-4" onclick="selectChapter(this,'msq-4')">
+        <span class="j-num">Phase 4</span>
+        <div class="j-icon">⏳</div>
+        <div class="j-title">Q3 · Jul–Sep</div>
+        <div class="j-meta">Countdown begins</div>
+      </div>
+      <div class="journey-chapter" data-ch="msq-5" onclick="selectChapter(this,'msq-5')">
+        <span class="j-num">Phase 5</span>
+        <div class="j-icon">🎭</div>
+        <div class="j-title">Q4 · The Night</div>
+        <div class="j-meta">November 7</div>
+      </div>
+    </div>
+
+    <div class="journey-detail-panels">
+
+      <div class="journey-detail show" data-detail="msq-1">
+        <span class="j-sub">Phase 1 · Q1 · January through March</span>
+        <h4>Cohorts open. The community forms. The Ball is whispered into existence.</h4>
+        <p>The first quarter is about getting the cohorts running and starting to introduce the community to itself. The Ball is teased — "something is coming in November" — but never explained. The mystery is part of the magic.</p>
+      </div>
+
+      <div class="journey-detail" data-detail="msq-2">
+        <span class="j-sub">Phase 2 · Q2 · April through June</span>
+        <h4>Real results published. The Ball announced. Momentum visible.</h4>
+        <p>Q2 makes the work tangible. Q1 cohort results shared publicly. First SEROI metrics released. The Ball officially announced. Social momentum starts to compound on itself.</p>
+      </div>
+
+      <div class="journey-detail" data-detail="msq-3">
+        <span class="j-sub">Phase 3 · July 1 · Ticket Launch Day</span>
+        <h4>Save-the-dates land everywhere at once.</h4>
+        <p>One day. Every channel. Email, SMS, and a beautiful physical save-the-date card mailed to every contact in the ecosystem. Every incubator member gets a personal invitation. The Ball moves from "coming" to "now real."</p>
+        <span class="j-dm-tag">📮 Includes: Save-the-date card to every ecosystem contact</span>
+      </div>
+
+      <div class="journey-detail" data-detail="msq-4">
+        <span class="j-sub">Phase 4 · Q3 · July through September</span>
+        <h4>The whole publishing presence shifts toward November.</h4>
+        <p>Every platform begins counting down. Attendee spotlights run weekly. Award nominations open. The formal invitation mailer goes to qualified incubator members on September 1. The community can feel the night approaching.</p>
+        <span class="j-dm-tag">📮 Includes: Formal invitation mailer (Sep 1) · Award nominee notification cards</span>
+      </div>
+
+      <div class="journey-detail" data-detail="msq-5">
+        <span class="j-sub">Phase 5 · Q4 · October and the night itself</span>
+        <h4>The final cohort. The full push. November 7 arrives.</h4>
+        <p>October hosts the final cohort. November opens the Ball to the public. Every post is a countdown. Every email is the night getting closer. And then — five to ten PM, November 7 — the evening arrives, the masks come on, the year gets named, and everything every campaign was building toward becomes a room you can actually walk into.</p>
+      </div>
+
+    </div>
     </div>
   </div>
 
@@ -519,25 +961,26 @@ td:first-child{color:var(--navy);font-weight:600}
     <div class="path-hero">
       <div class="path-hero-inner">
         <h3>Every person who enters your world<br>already has a clear next step.</h3>
-        <p>Intellabooks sorts every person who comes through BABIAD into exactly the right path — automatically, based on their engagement and business stage. You define who goes where. The system routes them perfectly, every time, without your team having to manually decide anything.</p>
+        <p>Intellabooks sorts every person who comes through BABIAD into exactly the right path — automatically, based on their engagement and business stage. You define who goes where. The system carries the routing forward at scale, so your team's energy stays where it matters most: the relationships themselves.</p>
+        <p style="font-size:0.78rem;color:var(--muted);font-style:italic;margin-top:0.5rem;margin-bottom:0">Tap any path below to see how it works.</p>
         <div class="path-cards">
-          <div class="path-card p-gold" onclick="expandPath(this)">
-            <div class="path-num">01</div>
-            <div class="path-name">Intellabooks Client</div>
-            <div class="path-desc">Established businesses ready for a full marketing and communication system.</div>
-            <div class="path-detail">$500 books the intro call — applies toward month one. Goal: 10 per cohort. Starts at Core and grows over 4 months as the data matures. The close happens in the room or on the follow-up call. Either way, the system captures them. ↓ Tap to expand</div>
-          </div>
           <div class="path-card p-barbie" onclick="expandPath(this)">
-            <div class="path-num">02</div>
+            <div class="path-num">01</div>
             <div class="path-name">Your Incubator</div>
             <div class="path-desc">Businesses that qualify for your ongoing program — criteria defined entirely by you.</div>
-            <div class="path-detail">Rolanda defines the exact qualification criteria. Intellabooks builds the routing logic around your definition. Onboarding sequence fires automatically. Your team is notified. They enter your world feeling cared for before anyone picks up the phone. ↓ Tap to expand</div>
+            <div class="path-detail">You define the exact qualification criteria. Intellabooks builds the routing logic around your definition. Onboarding sequence fires automatically. Your team is notified the moment a qualifying business arrives — so the welcome you'd give them can begin from a warm start, with all the context already in place.</div>
+          </div>
+          <div class="path-card p-gold" onclick="expandPath(this)">
+            <div class="path-num">02</div>
+            <div class="path-name">ASE Long Game</div>
+            <div class="path-desc">High-potential contacts building toward readiness. Kept warm. Always in the relationship.</div>
+            <div class="path-detail">Monthly touchpoints. Business value. Community wins. Masquerade invitation. The relationship stays at the temperature you'd keep it yourself — even across hundreds of contacts at once.</div>
           </div>
           <div class="path-card p-navy" onclick="expandPath(this)">
             <div class="path-num">03</div>
-            <div class="path-name">ASE Long Game</div>
-            <div class="path-desc">High-potential contacts building toward readiness. Kept warm. Always in the relationship.</div>
-            <div class="path-detail">Monthly touchpoints. Business value. Community wins. Masquerade invitation. The relationship stays warm until they are ready — and the system makes sure they always feel remembered. ↓ Tap to expand</div>
+            <div class="path-name">Intellabooks Platform</div>
+            <div class="path-desc">Supporting every kind of business in your ecosystem — wherever they are on the journey.</div>
+            <div class="path-detail">Intellabooks runs underneath all of it. For established BABIAD attendees ready for full systems day one: the complete platform. For incubator members still finding their legs: light-touch infrastructure that grows alongside them. For your high-performers at ASE — with giant legs already underneath them: enterprise-level reach that keeps pace with their scale. Same platform underneath, three different conversations. ($500 books the intro call for any business ready to climb on — applies toward month one. Goal: 10 per cohort.)</div>
           </div>
         </div>
       </div>
@@ -548,7 +991,7 @@ td:first-child{color:var(--navy);font-weight:600}
   <div class="section">
     <span class="eyebrow gold">From Registration to Relationship</span>
     <div class="pg-title">How Intellabooks Integrates<br>Into What You Already Have</div>
-    <p class="pg-sub">Your Square account stays exactly as it is. Intellabooks connects to it and takes over everything that happens after the payment — so your contacts never sit idle.</p>
+    <p class="pg-sub">Your Square account stays exactly as it is. Intellabooks connects to it and carries every new registration forward — so every face that comes through your door moves from registered to welcomed at the speed your audience expects.</p>
 
     <div class="flow">
       <div class="flow-node gold"><div class="flow-icon">💳</div><div class="flow-label">Square</div><div class="flow-sub">Payment processes. $395 virtual · $445 in-person</div></div>
@@ -613,7 +1056,7 @@ td:first-child{color:var(--navy);font-weight:600}
       <div class="flow-arrow">→</div>
       <div class="flow-node green"><div class="flow-icon">💬</div><div class="flow-label">24hr Check-In</div><div class="flow-sub">Human-feeling SMS follow-up</div></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node"><div class="flow-icon">♾️</div><div class="flow-label">Forever</div><div class="flow-sub">Monthly value. Ball invite. Nobody dropped.</div></div>
+      <div class="flow-node" style="background:linear-gradient(135deg,rgba(255,20,147,0.06),rgba(255,133,162,0.04));border-color:rgba(255,20,147,0.28)"><div class="flow-icon">♾️</div><div class="flow-label" style="color:#FF1493">Forever</div><div class="flow-sub">Monthly value. Ball invite. Nobody dropped.</div></div>
     </div>
   </div>
 
@@ -679,16 +1122,16 @@ td:first-child{color:var(--navy);font-weight:600}
   <div class="card" style="border:1px solid var(--bd);margin-bottom:1rem">
     <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.85rem;flex-wrap:wrap">
       <span style="font-size:0.88rem;color:var(--muted)">Everything lives at</span>
-      <span class="portal-badge">portal.intellabooks.com</span>
+      <a href="https://portal.intellabooks.com" target="_blank" rel="noopener" class="portal-badge" style="text-decoration:none">portal.intellabooks.com</a>
     </div>
     <p>Every campaign draft, approval, report, and contact in your system lives in one place — your portal. You have full visibility, full access, and full ownership at every step. What comes in through Square flows straight here. What Intellabooks builds goes here for your review before it ever reaches a contact. Your data lives here and goes nowhere without your direction.</p>
   </div>
 
-  <!-- COMPLIANCE ALERT -->
+  <!-- COMPLIANCE — NDA SIGNED -->
   <div class="compliance-alert">
-    <div class="compliance-label">Confidentiality Agreement — Signed May 6, 2026</div>
-    <h4>Your Contacts Are Protected. Your Data Is Yours.</h4>
-    <p>The Intellabooks Confidentiality Agreement — signed by both parties on May 6, 2026 — is already in effect. Your contacts, business plans, client profiles, and all proprietary information are fully protected. Neither party may use or share the other's information without prior written consent.</p>
+    <div class="compliance-label">Signed With Care — May 6, 2026</div>
+    <h4>What's yours stays yours. Always.</h4>
+    <p>The Confidentiality Agreement we signed together on May 6, 2026 is already protecting everything you've built. Your contacts, your business plans, your client profiles, your proprietary work — none of it leaves your hands without your written word. The same protection runs in the other direction. Two parties, one promise, both signed.</p>
     <div style="margin-top:0.85rem;cursor:pointer" onclick="toggleNDA()">
       <div style="font-size:0.8rem;color:rgba(180,0,90,0.8);font-weight:600;display:flex;align-items:center;gap:0.5rem">
         <span id="ndaArrow" style="transition:transform .25s;display:inline-block">▼</span>
@@ -702,22 +1145,20 @@ td:first-child{color:var(--navy);font-weight:600}
       <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#8B6400;font-weight:700;margin-bottom:0.5rem">The plain commitment</div>
       <div style="font-size:0.83rem;color:var(--muted);line-height:1.85">Contacts are never sold · You can export everything anytime · If you ever leave, your data leaves with you · Intellabooks only accesses your system when you have directed it.</div>
     </div>
-    <div style="display:flex;align-items:center;gap:0.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(200,0,100,0.12)">
-      <div class="check-box" id="checkBox" onclick="acknowledgeCompliance()"><span class="checkmark">✓</span></div>
-      <span class="check-label" onclick="acknowledgeCompliance()">I have read and acknowledge the Data Protection Agreement</span>
-      <span class="check-status" id="checkStatus">Pending</span>
-    </div>
   </div>
 
-  <!-- SECURITY LINK -->
-  <a href="intellabooks-security-overview.html" style="display:flex;align-items:center;gap:1rem;background:var(--white);border:1px solid var(--bd);border-left:3px solid var(--gold);border-radius:14px;padding:1rem 1.25rem;margin-bottom:1.5rem;text-decoration:none;box-shadow:0 3px 16px rgba(1,51,86,0.05);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 6px 24px rgba(1,51,86,0.1)'" onmouseout="this.style.boxShadow='0 3px 16px rgba(1,51,86,0.05)'">
-    <div style="width:38px;height:38px;border-radius:10px;background:var(--gold-light);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">🛡️</div>
-    <div style="flex:1">
-      <div style="font-size:0.88rem;font-weight:700;color:var(--navy);margin-bottom:0.15rem">Intellabooks Platform Security Overview</div>
-      <div style="font-size:0.75rem;color:var(--muted)">SOC 2 Type II · HIPAA-compliant · Enterprise-grade data protection · Full compliance documentation</div>
-    </div>
-    <div style="font-size:0.75rem;color:var(--gold);font-weight:600;white-space:nowrap">View →</div>
-  </a>
+  <!-- SECURITY OVERVIEW — PRIMARY CALL TO ACTION -->
+  <div style="margin-bottom:1.5rem">
+    <div style="font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:#FF1493;font-weight:700;margin-bottom:0.6rem">🛡️ Whenever you have a moment</div>
+    <a href="https://intellabooks.github.io/security-overview/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:1.1rem;background:linear-gradient(135deg,rgba(255,20,147,0.06),rgba(212,175,55,0.04));border:1.5px solid rgba(255,20,147,0.3);border-radius:18px;padding:1.4rem 1.5rem;text-decoration:none;box-shadow:0 6px 24px rgba(255,20,147,0.08);transition:transform .18s,box-shadow .18s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 32px rgba(255,20,147,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 24px rgba(255,20,147,0.08)'">
+      <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FF1493,#D4AF37);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;box-shadow:0 4px 14px rgba(255,20,147,0.25)">🛡️</div>
+      <div style="flex:1">
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:0.25rem;line-height:1.25">Take a look at our Security Overview.</div>
+        <div style="font-size:0.8rem;color:var(--muted);line-height:1.55">A clear walk-through of how Intellabooks keeps your data safe — SOC 2 Type II, HIPAA-compliant, enterprise-grade protection. Give it a read whenever you have a few quiet minutes.</div>
+      </div>
+      <div style="font-size:0.78rem;color:#FF1493;font-weight:700;white-space:nowrap">Open →</div>
+    </a>
+  </div>
 
   <div class="accord">
     <div class="accord-head" onclick="toggle(this)">
@@ -761,14 +1202,17 @@ td:first-child{color:var(--navy);font-weight:600}
     </div>
   </div>
 
-  <div class="section" style="margin-top:1.5rem">
-    <span class="eyebrow green">The Partnership Investment</span>
-    <table>
-      <tr><th>Service</th><th>Standard Value</th><th>Your Investment</th></tr>
-      <tr><td>Intellabooks Platform — full ecosystem</td><td><span class="strike">$2,400/month</span></td><td><span class="free-tag">Complimentary</span></td></tr>
-      <tr><td>Intellabooks PS — Alicia Martin, direct consulting + team</td><td><span class="strike">$200/hour + team</span></td><td><span class="free-tag">Complimentary</span></td></tr>
-    </table>
-    <p style="font-size:0.78rem;color:var(--muted);margin-top:0.65rem;font-style:italic;line-height:1.6">Provided in recognition of your introduction of Intellabooks to the BABIAD network and your commitment to this partnership.</p>
+  <!-- GIFT LETTER FROM ALICIA -->
+  <div class="section" style="margin-top:1.75rem">
+    <span class="eyebrow barbie">A Note From Alicia</span>
+    <div style="background:linear-gradient(135deg,rgba(255,20,147,0.05),rgba(255,133,162,0.04));border:1px solid rgba(255,20,147,0.22);border-radius:22px;padding:2.5rem 2.25rem;box-shadow:0 6px 28px rgba(1,51,86,0.07);position:relative;overflow:hidden">
+      <div style="position:absolute;top:1.25rem;right:1.5rem;font-size:1.75rem;opacity:0.18">💛</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,1.9rem);color:var(--navy);line-height:1.22;margin-bottom:1.5rem;max-width:560px">Just something I wanted you to <em style="color:#FF1493;font-style:italic">see.</em></div>
+      <p style="font-size:0.95rem;color:#1D1D1F;line-height:1.85;margin-bottom:1rem">Rolanda, I'm so glad we get to do this together. The partnership itself is the gift to me. And what I want even more is for you to see — firsthand — exactly what Intellabooks delivers for every business that walks through your doors.</p>
+      <p style="font-size:0.95rem;color:#1D1D1F;line-height:1.85;margin-bottom:1rem">So the whole platform, my strategy time, the team behind me — <strong style="color:#FF1493">yours to use, send people through, and see in action.</strong> Real reach. Real follow-through. Real numbers behind every cohort you fill. So you have every reason to feel as good about what your attendees are about to experience as I do.</p>
+      <p style="font-size:0.95rem;color:#1D1D1F;line-height:1.85;margin-bottom:1.5rem">Two are better than one. So glad we're going. 💛</p>
+      <div style="border-top:1px solid rgba(255,20,147,0.18);padding-top:1.25rem;font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);font-style:italic">— With love, Alicia</div>
+    </div>
   </div>
 
 </div>
@@ -784,54 +1228,39 @@ td:first-child{color:var(--navy);font-weight:600}
 
   <div class="step-grid">
 
-    <div class="step-card barbie-step">
+    <div class="step-card">
       <div class="step-head" onclick="toggleStep(this)">
         <div class="step-num">1</div>
         <div class="step-head-body">
-          <div class="step-title">Acknowledge The Blueprint</div>
-          <div class="step-meta">A simple confirmation — verbal, email, or signature</div>
+          <div class="step-title">Daily 8 AM check-ins — fifteen minutes together</div>
+          <div class="step-meta">Morning momentum · quick decisions · both sides aligned</div>
         </div>
         <div class="step-caret">▼</div>
       </div>
       <div class="step-detail">
-        <span class="step-timeline">Timeline — Immediately</span>
-        <p>This document sits alongside the Confidentiality Agreement signed May 6, 2026. A simple yes confirms both parties are aligned. You can find the full data protection detail and acknowledgment checkbox in the "Where You're Going" tab.</p>
+        <span class="step-timeline">Timeline — 8:00 AM daily, starting this week</span>
+        <p>Fifteen minutes at 8 AM each morning to keep the build moving — share what's on your mind, make quick decisions together, and stay aligned as the system comes to life. A small daily rhythm that protects the bigger creative work happening on either side. From launch through the first cohort, this is how we move together.</p>
       </div>
     </div>
 
-    <div class="step-card">
+    <div class="step-card barbie-step">
       <div class="step-head" onclick="toggleStep(this)">
         <div class="step-num">2</div>
         <div class="step-head-body">
-          <div class="step-title">Daily 15-minute check-ins begin</div>
-          <div class="step-meta">Morning momentum · information gathering · decisions made fast</div>
-        </div>
-        <div class="step-caret">▼</div>
-      </div>
-      <div class="step-detail">
-        <span class="step-timeline">Timeline — Starting this week · recurring daily</span>
-        <p>Fifteen minutes each morning to keep the build moving — gather what's needed, make quick decisions, and keep both sides aligned without long meetings. This is how systems get built efficiently. The daily rhythm replaces the need for back-and-forth and keeps momentum from launch through the first cohort.</p>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-head" onclick="toggleStep(this)">
-        <div class="step-num">3</div>
-        <div class="step-head-body">
-          <div class="step-title">✨ Let's get you settled in — portal.intellabooks.com goes live</div>
+          <div class="step-title">✨ Let's get you settled in — <a href="https://portal.intellabooks.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(255,20,147,0.5);text-underline-offset:3px" onclick="event.stopPropagation()">portal.intellabooks.com</a> goes live</div>
           <div class="step-meta">Sub-account built · all companies organized · login delivered to you</div>
         </div>
         <div class="step-caret">▼</div>
       </div>
       <div class="step-detail">
-        <span class="step-timeline">Timeline — Within 3 business days of Step 1</span>
+        <span class="step-timeline">Timeline — Within 3 business days of kick-off</span>
         <p>Your dedicated Àṣé Advisory & Tech sub-account is built and ready. All of your companies organized under one login. Your portal is where you review every draft, approve every campaign, check every report, and access your contact data anytime. Credentials delivered directly to you.</p>
       </div>
     </div>
 
     <div class="step-card">
       <div class="step-head" onclick="toggleStep(this)">
-        <div class="step-num">4</div>
+        <div class="step-num">3</div>
         <div class="step-head-body">
           <div class="step-title">🤝 Let us carry that for you — Square connects seamlessly</div>
           <div class="step-meta">One-time setup · tested before anything reaches a contact · you keep Square exactly as it is</div>
@@ -845,32 +1274,33 @@ td:first-child{color:var(--navy);font-weight:600}
     </div>
 
     <!-- CONTACT TRANSITION EXPLAINER -->
-    <div class="card" style="background:rgba(255,182,193,0.06);border:1px solid rgba(255,133,162,0.18);border-left:3px solid rgba(200,0,100,0.3);margin-bottom:0.75rem">
-      <h4 style="color:var(--navy);margin-bottom:0.5rem">💛 A gentle note about your contacts</h4>
-      <p style="font-size:0.85rem;color:var(--muted);line-height:1.75">We know your contact list is precious — it represents relationships you've built over years. Nobody is asking you to hand anything over. Here's what actually happens: Intellabooks will craft a warm, personal email invitation to your existing network, inviting them to register for BABIAD. They choose to come in. They arrive as attendees — not as transferred data. Every new registration from January forward flows in automatically through Square. Your people join because they want to, and that's the only way we'd ever want them there.</p>
+    <div class="card" style="background:linear-gradient(135deg,rgba(255,20,147,0.05),rgba(255,133,162,0.04));border:1px solid rgba(255,20,147,0.22);border-left:4px solid #FF1493;margin-bottom:0.75rem">
+      <div style="font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:#FF1493;font-weight:700;margin-bottom:0.5rem">💛 A Promise From Alicia</div>
+      <h4 style="color:var(--navy);margin-bottom:0.5rem">Your people are yours. Always.</h4>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.75">Your contact list is precious — it represents relationships you've built over years. Nobody is asking you to hand anything over. Here's what actually happens: Intellabooks will craft a warm, personal email invitation to your existing network, inviting them to register for BABIAD. They choose to come in. They arrive as attendees — not as transferred data. Every new registration from January forward flows in automatically through Square. Your people join because they want to, and that's the only way we'd ever want them there.</p>
+    </div>
+
+    <div class="step-card">
+      <div class="step-head" onclick="toggleStep(this)">
+        <div class="step-num">4</div>
+        <div class="step-head-body">
+          <div class="step-title">A warm re-introduction to your network</div>
+          <div class="step-meta">Written in your voice · they hear from you, they choose to come</div>
+        </div>
+        <div class="step-caret">▼</div>
+      </div>
+      <div class="step-detail">
+        <span class="step-timeline">Timeline — Before first cohort</span>
+        <p>Intellabooks drafts a beautiful re-introduction email — written in your voice, sent from you — inviting your existing network to register for BABIAD. They opt in because they want to. Each registration flows in automatically through Square, the same way every new face will arrive from January onward. Same warm welcome for everyone. Same beautiful beginning to a great chapter.</p>
+      </div>
     </div>
 
     <div class="step-card">
       <div class="step-head" onclick="toggleStep(this)">
         <div class="step-num">5</div>
         <div class="step-head-body">
-          <div class="step-title">Bring your existing network in — on their terms</div>
-          <div class="step-meta">No bulk transfer needed · your people choose to be here</div>
-        </div>
-        <div class="step-caret">▼</div>
-      </div>
-      <div class="step-detail">
-        <span class="step-timeline">Timeline — Before first cohort</span>
-        <p>Rather than moving your existing contacts into the system directly, Intellabooks will draft a warm re-engagement email inviting your current network to register for BABIAD. They opt in by registering. They enter the system on their own terms — as attendees, not as transferred data. Every new BABIAD registration from January forward flows in automatically through Square. Your existing relationships join when they're ready, because they want to.</p>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-head" onclick="toggleStep(this)">
-        <div class="step-num">6</div>
-        <div class="step-head-body">
           <div class="step-title">First campaign drafts submitted for your approval</div>
-          <div class="step-meta">Via portal.intellabooks.com · your voice · your sign-off required</div>
+          <div class="step-meta">Via <a href="https://portal.intellabooks.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(255,20,147,0.35);text-underline-offset:2px" onclick="event.stopPropagation()">portal.intellabooks.com</a> · your voice · your sign-off required</div>
         </div>
         <div class="step-caret">▼</div>
       </div>
@@ -880,12 +1310,31 @@ td:first-child{color:var(--navy);font-weight:600}
       </div>
     </div>
 
+    <div class="step-card">
+      <div class="step-head" onclick="toggleStep(this)">
+        <div class="step-num">6</div>
+        <div class="step-head-body">
+          <div class="step-title">Acknowledge the blueprint</div>
+          <div class="step-meta">A simple yes — verbal, email, or signature</div>
+        </div>
+        <div class="step-caret">▼</div>
+      </div>
+      <div class="step-detail">
+        <span class="step-timeline">Timeline — Whenever it feels right</span>
+        <p>Once you've had a chance to walk through this whole document — read the gift letter, look at the security overview, take in the journey charts for each of your businesses — a simple yes is all I need to know we're aligned. Verbal, email, signature, however feels best. No pressure on the timing. The Confidentiality Agreement we signed together on May 6, 2026 already covers the legal side. This is just the conversational confirmation that we're moving forward together.</p>
+      </div>
+    </div>
+
   </div>
 
   <div class="closing">
     <h3>Àṣé means <em>"so it is."</em><br>So let it be.</h3>
-    <p>Everything in this document is already in motion. The NDA is signed. The vision is shared. The only thing left is to build — and Intellabooks is ready the moment you are, Rolanda.</p>
-    <div class="closing-cta">⚡ portal.intellabooks.com — Your system is waiting.</div>
+    <p>Everything in this document is already in motion. The promise is signed. The vision is shared. The only thing left is to build — and Intellabooks is ready the moment you are, Rolanda.</p>
+    <a href="https://portal.intellabooks.com" target="_blank" rel="noopener" class="closing-cta" style="text-decoration:none">⚡ portal.intellabooks.com — Your system is waiting.</a>
+    <div style="margin-top:2rem;padding-top:1.75rem;border-top:1px solid rgba(255,20,147,0.2);max-width:520px;margin-left:auto;margin-right:auto;position:relative">
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:rgba(255,255,255,0.82);line-height:1.65;margin-bottom:0.6rem">"Plant the seeds. Trust the growth. <span style="color:#FF1493">We'll water together.</span>"</div>
+      <div style="font-size:0.72rem;letter-spacing:0.12em;color:rgba(255,255,255,0.4);font-weight:600">✨ Alicia · <span style="color:var(--gold)">1 Corinthians 3:7</span></div>
+    </div>
   </div>
 
 </div>
@@ -924,12 +1373,19 @@ function toggleNDA() {
   detail.style.display = isOpen ? 'none' : 'block';
   arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
 }
-function acknowledgeCompliance() {
-  const box = document.getElementById('checkBox');
-  const status = document.getElementById('checkStatus');
-  box.classList.add('checked');
-  status.textContent = 'Acknowledged — ' + new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  status.classList.add('confirmed');
+function toggleValueCard(card) {
+  card.classList.toggle('expanded');
+}
+function toggleBusiness(header) {
+  header.closest('.journey-block').classList.toggle('open');
+}
+function selectChapter(card, id) {
+  const block = card.closest('.journey-block');
+  block.querySelectorAll('.journey-chapter').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  block.querySelectorAll('.journey-detail').forEach(d => d.classList.remove('show'));
+  const target = block.querySelector('.journey-detail[data-detail="' + id + '"]');
+  if (target) target.classList.add('show');
 }
 </script>
 
